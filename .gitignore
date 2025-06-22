@@ -1,0 +1,36 @@
+# Build folders
+bin/
+obj/
+.vs/
+# Visual Studio files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code settings folder
+.vscode/
+
+# NuGet packages folder
+packages/
+
+# Logs
+*.log
+
+# Publish output
+publish/
+
+# Backup & temp files
+*.bak
+*.tmp
+
+# Environment variables file
+.env
+
+# Database files
+*.mdf
+*.ldf
+
+# System files
+.DS_Store
+Thumbs.db
