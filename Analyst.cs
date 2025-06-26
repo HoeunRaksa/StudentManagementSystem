@@ -60,7 +60,7 @@ namespace StudentManagementSystem
             {
                 if (conn == null) return;
 
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM AnalystTable", conn);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbAnalyst", conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dataGridView1.DataSource = dt;

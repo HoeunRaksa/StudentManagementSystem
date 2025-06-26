@@ -21,7 +21,7 @@ namespace StudentManagementSystem
 
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("GetClassroom", con);
+                    SqlCommand cmd = new SqlCommand("Select * From tbClassroom", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -42,14 +42,14 @@ namespace StudentManagementSystem
             {
                 if (con == null) return;
 
-                SqlCommand cmd = new SqlCommand("SELECT departmentId, departmentName FROM tbDepartment", con);
+                SqlCommand cmd = new SqlCommand("SELECT DepartmentID, DepartmentName FROM tbDepartment", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
                 comboBox1.DataSource = dt;
-                comboBox1.DisplayMember = "departmentName";
-                comboBox1.ValueMember = "departmentId";
+                comboBox1.DisplayMember = "DeepartmentName";
+                comboBox1.ValueMember = "DepartmentID";
             }
         }
         
