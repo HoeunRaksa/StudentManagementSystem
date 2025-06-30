@@ -53,7 +53,12 @@ partial class Classroom
         textBox5 = new System.Windows.Forms.TextBox();
         label9 = new System.Windows.Forms.Label();
         comboBox2 = new System.Windows.Forms.ComboBox();
+        panel1 = new System.Windows.Forms.Panel();
+        label10 = new System.Windows.Forms.Label();
+        txtSearch = new System.Windows.Forms.TextBox();
+        label11 = new System.Windows.Forms.Label();
         ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+        panel1.SuspendLayout();
         SuspendLayout();
         // 
         // label1
@@ -107,7 +112,7 @@ partial class Classroom
         // 
         // label7
         // 
-        label7.Location = new System.Drawing.Point(82, 251);
+        label7.Location = new System.Drawing.Point(82, 252);
         label7.Name = "label7";
         label7.Size = new System.Drawing.Size(75, 23);
         label7.TabIndex = 12;
@@ -126,61 +131,57 @@ partial class Classroom
         // dataGridView1
         // 
         dataGridView1.ColumnHeadersHeight = 29;
-        dataGridView1.Location = new System.Drawing.Point(57, 413);
+        dataGridView1.Location = new System.Drawing.Point(69, 494);
         dataGridView1.Name = "dataGridView1";
         dataGridView1.RowHeadersWidth = 51;
-        dataGridView1.Size = new System.Drawing.Size(1129, 217);
+        dataGridView1.Size = new System.Drawing.Size(1055, 217);
         dataGridView1.TabIndex = 16;
         // 
         // btnInsert
         // 
         btnInsert.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        btnInsert.Location = new System.Drawing.Point(197, 343);
+        btnInsert.Location = new System.Drawing.Point(177, 415);
         btnInsert.Name = "btnInsert";
         btnInsert.Size = new System.Drawing.Size(134, 49);
         btnInsert.TabIndex = 17;
         btnInsert.Text = "Insert";
         btnInsert.UseVisualStyleBackColor = true;
-        btnInsert.Click += new System.EventHandler(btnInsert_Click);
         // 
         // btnUpdate
         // 
-        btnUpdate.Location = new System.Drawing.Point(387, 343);
+        btnUpdate.Location = new System.Drawing.Point(384, 415);
         btnUpdate.Name = "btnUpdate";
         btnUpdate.Size = new System.Drawing.Size(128, 49);
         btnUpdate.TabIndex = 18;
         btnUpdate.Text = "Update";
         btnUpdate.UseVisualStyleBackColor = true;
-        btnUpdate.Click += new System.EventHandler(btnUpdate_Click);
         // 
         // btnNew
         // 
-        btnNew.Location = new System.Drawing.Point(581, 343);
+        btnNew.Location = new System.Drawing.Point(581, 415);
         btnNew.Name = "btnNew";
         btnNew.Size = new System.Drawing.Size(136, 49);
         btnNew.TabIndex = 19;
         btnNew.Text = "New";
         btnNew.UseVisualStyleBackColor = true;
-        btnNew.Click += new System.EventHandler(btnNew_Click);
         // 
         // btnLogout
         // 
-        btnLogout.Location = new System.Drawing.Point(790, 344);
+        btnLogout.Location = new System.Drawing.Point(785, 415);
         btnLogout.Name = "btnLogout";
         btnLogout.Size = new System.Drawing.Size(131, 49);
         btnLogout.TabIndex = 20;
         btnLogout.Text = "logout";
         btnLogout.UseVisualStyleBackColor = true;
-        btnLogout.Click += new System.EventHandler(btnLogout_Click);
         // 
         // label4
         // 
         label4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        label4.Location = new System.Drawing.Point(636, 144);
+        label4.Location = new System.Drawing.Point(595, 144);
         label4.Name = "label4";
-        label4.Size = new System.Drawing.Size(134, 23);
+        label4.Size = new System.Drawing.Size(161, 23);
         label4.TabIndex = 21;
-        label4.Text = "Department ID";
+        label4.Text = "Department Name";
         // 
         // comboBox1
         // 
@@ -241,7 +242,7 @@ partial class Classroom
         // 
         // label9
         // 
-        label9.Location = new System.Drawing.Point(82, 297);
+        label9.Location = new System.Drawing.Point(82, 294);
         label9.Name = "label9";
         label9.Size = new System.Drawing.Size(75, 23);
         label9.TabIndex = 29;
@@ -250,18 +251,56 @@ partial class Classroom
         // comboBox2
         // 
         comboBox2.FormattingEnabled = true;
-        comboBox2.Items.AddRange(new object[] { "Morning", "Afternoom", "Night" });
-        comboBox2.Location = new System.Drawing.Point(177, 292);
+        comboBox2.Location = new System.Drawing.Point(177, 294);
         comboBox2.Name = "comboBox2";
         comboBox2.Size = new System.Drawing.Size(120, 28);
         comboBox2.TabIndex = 30;
         // 
-        // Classroom
+        // panel1
+        // 
+        panel1.BackColor = System.Drawing.Color.DarkOrange;
+        panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        panel1.Controls.Add(label10);
+        panel1.Location = new System.Drawing.Point(0, 0);
+        panel1.Name = "panel1";
+        panel1.Size = new System.Drawing.Size(1304, 49);
+        panel1.TabIndex = 31;
+        // 
+        // label10
+        // 
+        label10.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        label10.Location = new System.Drawing.Point(490, 5);
+        label10.Name = "label10";
+        label10.Size = new System.Drawing.Size(225, 40);
+        label10.TabIndex = 32;
+        label10.Text = "Classrom Form";
+        label10.Click += label10_Click;
+        // 
+        // txtSearch
+        // 
+        txtSearch.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        txtSearch.Location = new System.Drawing.Point(163, 349);
+        txtSearch.Name = "txtSearch";
+        txtSearch.Size = new System.Drawing.Size(379, 38);
+        txtSearch.TabIndex = 32;
+        // 
+        // label11
+        // 
+        label11.Location = new System.Drawing.Point(82, 361);
+        label11.Name = "label11";
+        label11.Size = new System.Drawing.Size(75, 23);
+        label11.TabIndex = 33;
+        label11.Text = "Search :";
+        // 
+        // Form1
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         BackColor = System.Drawing.SystemColors.Control;
         ClientSize = new System.Drawing.Size(1283, 733);
+        Controls.Add(label11);
+        Controls.Add(txtSearch);
+        Controls.Add(panel1);
         Controls.Add(comboBox2);
         Controls.Add(label9);
         Controls.Add(textBox5);
@@ -287,9 +326,18 @@ partial class Classroom
         Controls.Add(label1);
         Location = new System.Drawing.Point(19, 19);
         ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+        panel1.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();
     }
+
+    private System.Windows.Forms.Label label11;
+
+    private System.Windows.Forms.TextBox txtSearch;
+
+    private System.Windows.Forms.Label label10;
+
+    private System.Windows.Forms.Panel panel1;
 
     private System.Windows.Forms.ComboBox comboBox2;
 
