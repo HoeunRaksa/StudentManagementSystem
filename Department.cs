@@ -112,6 +112,7 @@ namespace StudentManagementSystem
                 }
             }
         }
+
         //private void btnSearch_Click(object sender, EventArgs e)
         //{
         //    // Get search term from TextBox (txtSearch)
