@@ -45,7 +45,7 @@ namespace StudentManagementSystem
             {
                 try
                 {
-                    conn.Open();
+                    //conn.Open();
 
                     SqlCommand cmd = new SqlCommand("spInsertStaff", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -87,7 +87,7 @@ namespace StudentManagementSystem
             {
                 try
                 {
-                    conn.Open();
+                    //conn.Open();
 
                     SqlCommand cmd = new SqlCommand("spUpdateStaff", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -122,9 +122,9 @@ namespace StudentManagementSystem
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Form1 fm1 = new Form1();
-            fm1.Show();
-            this.Hide();
+            //Form1 fm1 = new Form1();
+            //fm1.Show();
+            //this.Hide();
         }
         private void LoadData()
         {
@@ -132,8 +132,8 @@ namespace StudentManagementSystem
             {
                 using (var conn = HandleConnection.GetConnection())
                 {
-                    if (conn.State != ConnectionState.Open)
-                        conn.Open();
+                    //if (conn.State != ConnectionState.Open)
+                    //    conn.Open();
 
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStaff", conn);
                     DataTable dt = new DataTable();
@@ -243,8 +243,8 @@ namespace StudentManagementSystem
 
 
             {
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
+                //if (conn.State != ConnectionState.Open)
+                //    conn.Open();
 
                 SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStaff WHERE StaffID = @StaffID", conn);
                  
@@ -371,7 +371,7 @@ namespace StudentManagementSystem
         {
             string newID = "S0001";
 
-            using (SqlConnection conn = HandleConnection.GetConnection())
+            using (SqlConnection conn = new SqlConnection(HandleConnection.ConnnectionString))
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT TOP 1 staffID FROM tbStaff ORDER BY staffID DESC", conn);
@@ -387,16 +387,6 @@ namespace StudentManagementSystem
             }
 
             return newID;
-        }
-        public static class HandleConnection
-        {
-            public static string ConnectionString = $"Server=TOLASEYHA\\SQLEXPRESS;Database=dbUMS;Trusted_Connection=true;TrustServerCertificate=true;";
-
-            public static SqlConnection GetConnection()
-            {
-                return new SqlConnection(ConnectionString); // ALWAYS return new connection
-            }
-        }
-
+        } 
     }
 }

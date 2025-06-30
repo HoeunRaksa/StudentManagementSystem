@@ -41,8 +41,8 @@ namespace StudentManagementSystem
 
             try
             {
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
+                //if (conn.State != ConnectionState.Open)
+                //    conn.Open();
 
                 SqlCommand cmd = new SqlCommand("spInsertStudent", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -90,8 +90,8 @@ namespace StudentManagementSystem
             {
                 try
                 {
-                    if (conn.State != ConnectionState.Open)
-                        conn.Open();
+                    //if (conn.State != ConnectionState.Open)
+                    //    conn.Open();
 
                     SqlCommand cmd = new SqlCommand("spUpdateStudent", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -130,9 +130,9 @@ namespace StudentManagementSystem
         //Button Logout
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Form1 fm1 = new Form1();
-            fm1.Show();
-            this.Hide();
+            //Form1 fm1 = new Form1();
+            //fm1.Show();
+            //this.Hide();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -155,8 +155,8 @@ namespace StudentManagementSystem
             }
             using (var conn = HandleConnection.GetConnection())
             {
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
+                //if (conn.State != ConnectionState.Open)
+                //    conn.Open();
 
                 SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStudent WHERE studentID = @StudentID", conn);
                 da.SelectCommand.Parameters.AddWithValue("@StudentID", txtSearch.Text.Trim());
@@ -252,8 +252,8 @@ namespace StudentManagementSystem
             {
                 using (var conn = HandleConnection.GetConnection())
                 {
-                    if (conn.State != ConnectionState.Open)
-                        conn.Open();
+                    //if (conn.State != ConnectionState.Open)
+                    //    conn.Open();
 
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStudent", conn);
                     DataTable dt = new DataTable();
@@ -309,8 +309,8 @@ namespace StudentManagementSystem
         {
             using (SqlConnection conn = HandleConnection.GetConnection())
             {
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
+                //if (conn.State != ConnectionState.Open)
+                //    conn.Open();
 
                 SqlDataAdapter daDept = new SqlDataAdapter("SELECT departmentID, departmentName FROM tbDepartment", conn);
                 DataTable dtDept = new DataTable();
@@ -389,7 +389,7 @@ namespace StudentManagementSystem
         {
             string newID = "ST0001";
 
-            using (SqlConnection conn = new SqlConnection(HandleConnection.GetConnection().ConnectionString))
+            using (SqlConnection conn = new SqlConnection(HandleConnection.ConnnectionString))
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT TOP 1 studentID FROM tbStudent ORDER BY studentID DESC", conn);
@@ -405,17 +405,6 @@ namespace StudentManagementSystem
             }
 
             return newID;
-        }
-        public static class HandleConnection
-        {
-            public static string ConnectionString = $"Server=TOLASEYHA\\SQLEXPRESS;Database=dbUMS;Trusted_Connection=true;TrustServerCertificate=true;";
-
-            public static SqlConnection GetConnection()
-            {
-                return new SqlConnection(ConnectionString); // ALWAYS return new connection
-            }
-        }
-
-       
+        } 
     }
 }
