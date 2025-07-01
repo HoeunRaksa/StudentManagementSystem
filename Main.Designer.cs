@@ -242,7 +242,7 @@ partial class Main
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(1283, 733);
+        ClientSize = new System.Drawing.Size(1283, 753);
         Controls.Add(close);
         Controls.Add(logout);
         Controls.Add(analyst);
@@ -258,6 +258,7 @@ partial class Main
         Controls.Add(staff);
         Controls.Add(enrollment);
         Controls.Add(panel1);
+        StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         Text = "Main";
         panel1.ResumeLayout(false);
         ResumeLayout(false);
