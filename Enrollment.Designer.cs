@@ -77,6 +77,7 @@
             txtGrade = new TextBox();
             dtpEnrollDate = new DateTimePicker();
             label7 = new Label();
+            btnHome = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvEnrollment).BeginInit();
             SuspendLayout();
@@ -85,7 +86,7 @@
             // 
             btnNew.BackColor = Color.YellowGreen;
             btnNew.ForeColor = SystemColors.ButtonHighlight;
-            btnNew.Location = new Point(1014, 403);
+            btnNew.Location = new Point(1014, 397);
             btnNew.Name = "btnNew";
             btnNew.Size = new Size(113, 47);
             btnNew.TabIndex = 248;
@@ -136,18 +137,18 @@
             label6.AutoSize = true;
             label6.Location = new Point(771, 336);
             label6.Name = "label6";
-            label6.Size = new Size(111, 20);
+            label6.Size = new Size(92, 20);
             label6.TabIndex = 241;
-            label6.Text = "Department ID:";
+            label6.Text = "Department:";
             // 
             // chkActive
             // 
             chkActive.AutoSize = true;
             chkActive.Location = new Point(891, 292);
             chkActive.Name = "chkActive";
-            chkActive.Size = new Size(68, 24);
+            chkActive.Size = new Size(72, 24);
             chkActive.TabIndex = 223;
-            chkActive.Text = "Study";
+            chkActive.Text = "Active";
             chkActive.UseVisualStyleBackColor = true;
             // 
             // txtParentPhone
@@ -161,7 +162,7 @@
             // 
             btnLogout.BackColor = Color.Firebrick;
             btnLogout.ForeColor = SystemColors.ButtonHighlight;
-            btnLogout.Location = new Point(1133, 403);
+            btnLogout.Location = new Point(1133, 397);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(113, 47);
             btnLogout.TabIndex = 237;
@@ -173,16 +174,16 @@
             chkInactive.AutoSize = true;
             chkInactive.Location = new Point(974, 292);
             chkInactive.Name = "chkInactive";
-            chkInactive.Size = new Size(103, 24);
+            chkInactive.Size = new Size(82, 24);
             chkInactive.TabIndex = 240;
-            chkInactive.Text = "Stop Study";
+            chkInactive.Text = "Inactive";
             chkInactive.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
             btnUpdate.BackColor = Color.Navy;
             btnUpdate.ForeColor = SystemColors.ButtonHighlight;
-            btnUpdate.Location = new Point(892, 403);
+            btnUpdate.Location = new Point(892, 397);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(113, 47);
             btnUpdate.TabIndex = 234;
@@ -193,7 +194,7 @@
             // 
             btnInsert.BackColor = Color.Green;
             btnInsert.ForeColor = SystemColors.ButtonHighlight;
-            btnInsert.Location = new Point(771, 403);
+            btnInsert.Location = new Point(771, 397);
             btnInsert.Name = "btnInsert";
             btnInsert.Size = new Size(108, 47);
             btnInsert.TabIndex = 233;
@@ -301,9 +302,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(220, 140);
             label1.Name = "label1";
-            label1.Size = new Size(71, 20);
+            label1.Size = new Size(75, 20);
             label1.TabIndex = 204;
-            label1.Text = "NameEN:";
+            label1.Text = "Name EN:";
             // 
             // label2
             // 
@@ -390,6 +391,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(255, 128, 0);
+            panel1.Controls.Add(btnHome);
             panel1.Controls.Add(label17);
             panel1.Location = new Point(0, 1);
             panel1.Name = "panel1";
@@ -509,6 +511,15 @@
             label7.TabIndex = 258;
             label7.Text = "Enroll Date:";
             // 
+            // btnHome
+            // 
+            btnHome.Location = new Point(1358, 11);
+            btnHome.Name = "btnHome";
+            btnHome.Size = new Size(94, 29);
+            btnHome.TabIndex = 259;
+            btnHome.Text = "Home";
+            btnHome.UseVisualStyleBackColor = true;
+            // 
             // Enrollment
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -623,5 +634,6 @@
         private TextBox txtGrade;
         private DateTimePicker dtpEnrollDate;
         private Label label7;
+        private Button btnHome;
     }
 }

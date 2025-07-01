@@ -21,6 +21,7 @@ namespace StudentManagementSystem
             InitializeComponent();
             LoadData();
             LoadComboBoxes();
+            txtGrade.ReadOnly = true;
             txtStudentID.ReadOnly = true;
             dgvEnrollment.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.KeyPreview = true;
@@ -31,6 +32,19 @@ namespace StudentManagementSystem
             btnLogout.Click += btnLogOut_Click;
             btnRefresh.Click += btnRefresh_Click;
             btnNew.Click += btnNew_Click;
+            btnHome.Click += btnHome_Click;
+            dgvEnrollment.CellClick += dgvEnrollment_CellClick;
+
+            chkActive.CheckedChanged += chkActive_CheckedChanged;
+            chkInactive.CheckedChanged += chkInactive_CheckedChanged;
+            chkPass.CheckedChanged += chkPass_CheckedChanged;
+            chkFailed.CheckedChanged += chkFailed_CheckedChanged;
+            chkMale.CheckedChanged += chkMale_CheckedChanged;
+            chkFemale.CheckedChanged += chkFemale_CheckedChanged;
+
+            txtScore.TextChanged += txtScore_TextChanged;
+
+
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
@@ -57,8 +71,11 @@ namespace StudentManagementSystem
                 cmd.Parameters.AddWithValue("@ParentPhone", txtParentPhone.Text);
                 //cmd.Parameters.AddWithValue("@BirthAddress", txtBirthAddress.Text);
 
-
                 cmd.Parameters.AddWithValue("@ResultScore", txtScore.Text);
+                if (double.TryParse(txtScore.Text, out double score))
+                {
+                    txtGrade.Text = GetGradeFromScore(score);
+                }
                 cmd.Parameters.AddWithValue("@ResultGrade", txtGrade.Text);
                 cmd.Parameters.AddWithValue("@Result", chkPass.Checked ? 1 : 0);
                 cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
@@ -107,6 +124,10 @@ namespace StudentManagementSystem
                     cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
                     cmd.Parameters.AddWithValue("@ParentPhone", txtParentPhone.Text);
                     cmd.Parameters.AddWithValue("@ResultScore", txtScore.Text);
+                    if (double.TryParse(txtScore.Text, out double score))
+                    {
+                        txtGrade.Text = GetGradeFromScore(score);
+                    }
                     cmd.Parameters.AddWithValue("@ResultGrade", txtGrade.Text);
                     cmd.Parameters.AddWithValue("@Result", chkPass.Checked ? 1 : 0);
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
@@ -128,11 +149,11 @@ namespace StudentManagementSystem
         }
 
         //Button Logout
-        private void btnLogOut_Click(object sender, EventArgs e)
+        private void btnHome_Click(object sender, EventArgs e)
         {
-            //Form1 fm1 = new Form1();
-            //fm1.Show();
-            //this.Hide();
+            Main mn = new Main();
+            mn.Show();
+            this.Hide();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -145,8 +166,17 @@ namespace StudentManagementSystem
         private void btnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
+            LoadData();
 
         }
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Login li = new Login();
+            li.Show();
+            this.Hide();
+
+        }
+
 
         private void SearchEnrollment()
         {
@@ -216,8 +246,7 @@ namespace StudentManagementSystem
                     MessageBox.Show("Enrollment not found.");
                 }
             }
-        }
-
+        } 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -254,10 +283,7 @@ namespace StudentManagementSystem
             try
             {
                 using (var conn = HandleConnection.GetConnection())
-                {
-                    //if (conn.State != ConnectionState.Open)
-                    //    conn.Open();
-
+                { 
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbEnrollment", conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -280,8 +306,7 @@ namespace StudentManagementSystem
                     }
 
                     // Bind to DataGridView
-                    sub_LoadData();
-
+                    sub_LoadData(); 
                     dgvEnrollment.DataSource = dt;
                 }
             }
@@ -310,8 +335,7 @@ namespace StudentManagementSystem
                     nextControl = GetNextControl(nextControl, true);
                 }
             }
-        }
-
+        } 
         private void LoadComboBoxes()
         {
             using (SqlConnection conn = HandleConnection.GetConnection())
@@ -387,6 +411,105 @@ namespace StudentManagementSystem
                     dgvEnrollment.Columns[col].Visible = false;
             }
         }
+        private void dgvEnrollment_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvEnrollment.Rows[e.RowIndex];
+
+                txtStudentID.Text = row.Cells["enStudentID"].Value?.ToString();
+                txtNameEN.Text = row.Cells["enStudentNameEN"].Value?.ToString();
+                txtNameKH.Text = row.Cells["enStudentNameKH"].Value?.ToString();
+
+                string gender = row.Cells["GenderText"].Value?.ToString();
+                chkMale.Checked = gender == "Male";
+                chkFemale.Checked = gender == "Female";
+
+                if (row.Cells["birthdate"].Value != DBNull.Value)
+                    dtpBirthDate.Value = Convert.ToDateTime(row.Cells["birthdate"].Value);
+
+                txtPhone.Text = row.Cells["phone"].Value?.ToString();
+                txtParentPhone.Text = row.Cells["parentPhone"].Value?.ToString();
+                txtScore.Text = row.Cells["resultScore"].Value?.ToString();
+                txtGrade.Text = row.Cells["resultGrade"].Value?.ToString();
+
+                string result = row.Cells["ResultText"].Value?.ToString();
+                chkPass.Checked = result == "Pass";
+                chkFailed.Checked = result == "Failed";
+
+                txtAddress.Text = row.Cells["address"].Value?.ToString();
+
+                if (row.Cells["enDate"].Value != DBNull.Value)
+                    dtpEnrollDate.Value = Convert.ToDateTime(row.Cells["enDate"].Value);
+
+                string status = row.Cells["StatusText"].Value?.ToString();
+                chkActive.Checked = status == "Active";
+                chkInactive.Checked = status == "Inactive";
+
+                if (row.Cells["departmentID"].Value != DBNull.Value)
+                    cboDepartmentID.SelectedValue = Convert.ToInt32(row.Cells["departmentID"].Value);
+            }
+        }
+
+        private void chkMale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMale.Checked)
+                chkFemale.Checked = false;
+        }
+
+        private void chkFemale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFemale.Checked)
+                chkMale.Checked = false;
+        }
+
+        private void chkActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkActive.Checked)
+                chkInactive.Checked = false;
+        }
+
+        private void chkInactive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkInactive.Checked)
+                chkActive.Checked = false;
+        }
+
+        private void chkPass_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPass.Checked)
+                chkFailed.Checked = false;
+        }
+
+        private void chkFailed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFailed.Checked)
+                chkPass.Checked = false;
+        }
+
+        private void txtScore_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse(txtScore.Text, out double score))
+            {
+                txtGrade.Text = GetGradeFromScore(score);
+            }
+            else
+            {
+                txtGrade.Clear(); // Clear if input is invalid
+            }
+        }
+         
+        private string GetGradeFromScore(double score)
+        {
+            if (score >= 90) return "A";
+            else if (score >= 80) return "B";
+            else if (score >= 70) return "C";
+            else if (score >= 60) return "D";
+            else if (score >= 50) return "E";
+            else return "F";
+        }
+
+
 
         //Generate ID 
         private string GenerateEnrollmentID()

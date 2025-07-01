@@ -80,6 +80,7 @@
             label17 = new Label();
             panel2 = new Panel();
             panel1 = new Panel();
+            btnHome = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStudent).BeginInit();
             panel1.SuspendLayout();
@@ -575,11 +576,21 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(255, 128, 0);
+            panel1.Controls.Add(btnHome);
             panel1.Controls.Add(label17);
             panel1.Location = new Point(2, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1464, 55);
             panel1.TabIndex = 184;
+            // 
+            // btnHome
+            // 
+            btnHome.Location = new Point(1358, 17);
+            btnHome.Name = "btnHome";
+            btnHome.Size = new Size(94, 29);
+            btnHome.TabIndex = 1;
+            btnHome.Text = "Home";
+            btnHome.UseVisualStyleBackColor = true;
             // 
             // Student_Form
             // 
@@ -653,5 +664,6 @@
         private TextBox txtGeneration;
         private Button btnRefresh;
         private Button btnNew;
+        private Button btnHome;
     }
 }
