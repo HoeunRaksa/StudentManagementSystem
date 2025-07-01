@@ -41,12 +41,21 @@ namespace StudentManagementSystem
                 comboBox3.ValueMember = "StaffID";
 
                 // Role
-                SqlDataAdapter roleAdapter = new SqlDataAdapter("SELECT DISTINCT Role FROM tbStaff WHERE Status = 1", conn);
+                SqlDataAdapter roleAdapter = new SqlDataAdapter(@"SELECT DISTINCT 
+           CASE 
+            WHEN Role = 1 THEN 'Admin'
+            WHEN Role = 0 THEN 'Staff'
+            ELSE 'Unknown'
+                END AS RoleDisplay,
+                 Role AS RoleValue
+                 FROM tbStaff
+                 WHERE Status = 1", conn);
                 DataTable dtRole = new DataTable();
                 roleAdapter.Fill(dtRole);
+
                 comboBox2.DataSource = dtRole;
-                comboBox2.DisplayMember = "Role";
-                comboBox2.ValueMember = "Role";
+                comboBox2.DisplayMember = "RoleDisplay"; // What user sees
+                comboBox2.ValueMember = "RoleValue"; 
 
                 // Department
                 SqlDataAdapter deptNameAdapter = new SqlDataAdapter("SELECT DepartmentID, DepartmentName FROM tbDepartment", conn);
