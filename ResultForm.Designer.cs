@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
+            close = new PictureBox();
             label1 = new Label();
             label2 = new Label();
             stuid = new TextBox();
@@ -52,37 +52,38 @@
             comboCreateAt = new ComboBox();
             label9 = new Label();
             label10 = new Label();
+            btnClear = new Button();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)close).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataOne).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.DarkOrange;
-            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(close);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(-2, -1);
             panel1.Name = "panel1";
             panel1.Size = new Size(1286, 63);
             panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // close
             // 
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Image = Properties.Resources.cross;
-            pictureBox1.Location = new Point(1228, 19);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(31, 27);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
+            close.Cursor = Cursors.Hand;
+            close.Image = Properties.Resources.cross;
+            close.Location = new Point(1228, 19);
+            close.Name = "close";
+            close.Size = new Size(31, 27);
+            close.SizeMode = PictureBoxSizeMode.Zoom;
+            close.TabIndex = 1;
+            close.TabStop = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 25F, FontStyle.Bold, GraphicsUnit.Pixel);
-            label1.Location = new Point(539, 19);
+            label1.Location = new Point(566, 10);
             label1.Name = "label1";
             label1.Size = new Size(168, 35);
             label1.TabIndex = 1;
@@ -176,27 +177,27 @@
             dataOne.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataOne.ColumnHeadersHeight = 25;
             dataOne.Cursor = Cursors.Hand;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Window;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle5.Padding = new Padding(3);
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            dataOne.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new Padding(3);
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataOne.DefaultCellStyle = dataGridViewCellStyle3;
             dataOne.Location = new Point(246, 93);
             dataOne.Name = "dataOne";
             dataOne.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.Control;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle6.Padding = new Padding(3);
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.ActiveCaption;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dataOne.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.Padding = new Padding(3);
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.ActiveCaption;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dataOne.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dataOne.RowHeadersWidth = 60;
             dataOne.Size = new Size(1011, 628);
             dataOne.TabIndex = 16;
@@ -240,12 +241,15 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(66, 681);
+            btnSave.BackColor = Color.DeepSkyBlue;
+            btnSave.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 192);
+            btnSave.FlatAppearance.BorderSize = 4;
+            btnSave.Location = new Point(127, 683);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(86, 38);
             btnSave.TabIndex = 22;
             btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
+            btnSave.UseVisualStyleBackColor = false;
             // 
             // combosemester
             // 
@@ -294,11 +298,23 @@
             label10.TabIndex = 27;
             label10.Text = "YearExam";
             // 
+            // btnClear
+            // 
+            btnClear.BackColor = Color.FromArgb(224, 224, 224);
+            btnClear.ForeColor = SystemColors.ActiveCaptionText;
+            btnClear.Location = new Point(15, 683);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(86, 38);
+            btnClear.TabIndex = 28;
+            btnClear.Text = "Cancel";
+            btnClear.UseVisualStyleBackColor = false;
+            // 
             // ResultForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1283, 733);
+            Controls.Add(btnClear);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(comboCreateAt);
@@ -324,7 +340,7 @@
             Text = "Form1";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)close).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataOne).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -333,7 +349,7 @@
         #endregion
 
         private Panel panel1;
-        private PictureBox pictureBox1;
+        private PictureBox close;
         private Label label1;
         private Label label2;
         private TextBox stuid;
@@ -354,5 +370,6 @@
         private ComboBox comboCreateAt;
         private Label label9;
         private Label label10;
+        private Button btnClear;
     }
 }

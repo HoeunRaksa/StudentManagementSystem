@@ -18,7 +18,7 @@ namespace StudentManagementSystem
             InitializeComponent();
             LoadDepartments();
 
-            comboShift.Items.AddRange(new string[] { "All", "morning", "afternoon", "night" });
+            comboShift.Items.AddRange(new string[] { "All Shifts", "morning", "afternoon", "night" });
             LoadCreatedYears(2020, DateTime.Now.Year);
             LoadSemesters();
             combodepartment.SelectedIndexChanged += combodepartment_SelectedIndexChanged;
@@ -33,8 +33,13 @@ namespace StudentManagementSystem
             dataOne.DataError += (s, e) => { e.ThrowException = false; };
 
             this.Load += Form1_Load;
+            btnClear.Click += Form1_Load;
+            close.Click += formClose;
         }
-
+        private void formClose(object sender, EventArgs e)
+        {
+               this.Close();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             if (combodepartment.Items.Count > 0)
@@ -65,18 +70,20 @@ namespace StudentManagementSystem
         private void LoadCreatedYears(int startYear, int endYear)
         {
             comboCreateAt.Items.Clear();
-            comboCreateAt.Items.Add("All");
+
+            comboCreateAt.Items.Add("All ExamYears"); // Keep the label item
+
             for (int year = startYear; year <= endYear; year++)
             {
-                comboCreateAt.Items.Add(year);
+                comboCreateAt.Items.Add(year.ToString()); // 👈 Only the year
             }
-            comboCreateAt.SelectedIndex = 0; // Default to "All"
-        }
 
+            comboCreateAt.SelectedIndex = 0;
+        }
         private void LoadSemesters()
         {
             combosemester.Items.Clear();
-            combosemester.Items.Add("All");
+            combosemester.Items.Add("All Semesters");
             combosemester.Items.Add("1");
             combosemester.Items.Add("2");
             combosemester.SelectedIndex = 0;
@@ -171,25 +178,31 @@ namespace StudentManagementSystem
             }
 
             int? gen = null;
-            if (combogeneration.SelectedItem != null && combogeneration.SelectedItem.ToString() != "All")
+            if (combogeneration.SelectedItem != null && combogeneration.SelectedItem.ToString() != "All Generations")
             {
-                if (int.TryParse(combogeneration.SelectedItem.ToString(), out int genVal))
+                string selectedText = combogeneration.SelectedItem.ToString();
+
+                // Replace "Generation " with empty string before parsing
+                selectedText = selectedText.Replace("Generation", "").Trim();
+
+                if (int.TryParse(selectedText, out int genVal))
                     gen = genVal;
             }
 
+
             string shift = comboShift.SelectedItem?.ToString();
-            if (string.IsNullOrEmpty(shift) || shift == "All")
+            if (string.IsNullOrEmpty(shift) || shift == "All Shifts")
                 shift = null;
 
             byte? semester = null;
-            if (combosemester.SelectedItem != null && combosemester.SelectedItem.ToString() != "All")
+            if (combosemester.SelectedItem != null && combosemester.SelectedItem.ToString() != "All Semesters")
             {
                 if (byte.TryParse(combosemester.SelectedItem.ToString(), out byte sem))
                     semester = sem;
             }
 
             int? createdYear = null;
-            if (comboCreateAt.SelectedItem != null && comboCreateAt.SelectedItem.ToString() != "All")
+            if (comboCreateAt.SelectedItem != null && comboCreateAt.SelectedItem.ToString() != "All ExamYears")
             {
                 if (int.TryParse(comboCreateAt.SelectedItem.ToString(), out int year))
                     createdYear = year;
@@ -285,7 +298,7 @@ namespace StudentManagementSystem
                 // Add "All" option
                 DataRow allRow = dt.NewRow();
                 allRow["classroomID"] = 0;
-                allRow["classroomName"] = "All";
+                allRow["classroomName"] = "All Classes";
                 dt.Rows.InsertAt(allRow, 0);
 
                 comboclassroom.DataSource = dt;
@@ -315,10 +328,14 @@ namespace StudentManagementSystem
             using var adapter = new SqlDataAdapter(cmd);
             adapter.Fill(dt);
 
-            var generations = new System.Collections.Generic.List<string> { "All" };
+            var generations = new List<string> { "All Generations" };
             foreach (DataRow row in dt.Rows)
             {
-                generations.Add(row["generation"].ToString());
+                var genVal = row["generation"].ToString();
+                if (int.TryParse(genVal, out int year))
+                    generations.Add($"Generation {year}");
+                else
+                    generations.Add(genVal); // fallback if not a number
             }
 
             combogeneration.DataSource = generations;
@@ -403,21 +420,33 @@ namespace StudentManagementSystem
 
                         // 🔄 Get 'created_at' from cell or ComboBox
                         DateTime createdAt;
-                        if (dataOne.Columns.Contains("created_at") && row.Cells["created_at"].Value != null &&
+
+                        if (dataOne.Columns.Contains("created_at") &&
+                            row.Cells["created_at"].Value != null &&
                             DateTime.TryParse(row.Cells["created_at"].Value.ToString(), out DateTime parsedDate))
                         {
                             createdAt = parsedDate;
                         }
                         else
                         {
+                            // Default to current year
                             int createdYear = DateTime.Now.Year;
-                            if (comboCreateAt.SelectedItem != null && comboCreateAt.SelectedItem.ToString() != "All" &&
-                                int.TryParse(comboCreateAt.SelectedItem.ToString(), out int year))
-                                createdYear = year;
 
+                            // Handle combo box selection if it's not "All ExamYear"
+                            if (comboCreateAt.SelectedItem is string selected && selected != "All ExamYears")
+                            {
+                                // Remove prefix like "ExamYear " if needed
+                                selected = selected.Replace("ExamYear ", "").Trim();
+
+                                if (int.TryParse(selected, out int year))
+                                {
+                                    createdYear = year;
+                                }
+                            }
+
+                            // Use selected year with today's month and day
                             createdAt = new DateTime(createdYear, DateTime.Now.Month, DateTime.Now.Day);
                         }
-
                         // 🔄 Get 'semester' from cell or ComboBox
                         byte semester = 1;
                         if (dataOne.Columns.Contains("semester") && row.Cells["semester"].Value != null &&
@@ -425,7 +454,7 @@ namespace StudentManagementSystem
                         {
                             semester = parsedSem;
                         }
-                        else if (combosemester.SelectedItem != null && combosemester.SelectedItem.ToString() != "All" &&
+                        else if (combosemester.SelectedItem != null && combosemester.SelectedItem.ToString() != "All Semesters" &&
                                  byte.TryParse(combosemester.SelectedItem.ToString(), out byte comboSem))
                         {
                             semester = comboSem;
