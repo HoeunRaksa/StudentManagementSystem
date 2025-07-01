@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;  // Use this or System.Data.SqlClient based on your setup
 using StudentManagementSysytem; // Assuming this contains your HandleConnection class
 
 namespace StudentManagementSystem
 {
-    public partial class Form1 : Form
+    public partial class ResultForm : Form
     {
         private DataSet ds = new DataSet();
         private bool _isUpdatingControls = false;
         private bool isLoading = false;
 
-        public Form1()
+        public ResultForm()
         {
             InitializeComponent();
             LoadDepartments();
@@ -439,7 +440,17 @@ namespace StudentManagementSystem
                             decimal score = 0;
                             object val = row.Cells[colName].Value;
                             if (val != null && val != DBNull.Value)
-                                decimal.TryParse(val.ToString(), out score);
+                                if (decimal.TryParse(val.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedScore))
+                                {
+                                    if (parsedScore >= 0 && parsedScore <= 999.99m)
+                                        score = parsedScore;
+                                    else
+                                        continue; // skip invalid score
+                                }
+                                else
+                                {
+                                    continue; // skip if not a number
+                                }
 
                             int subjectID = subjectNameToID[colName];
 
