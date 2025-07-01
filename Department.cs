@@ -91,7 +91,7 @@ namespace StudentManagementSystem
 
                     // Hide unnecessary columns
                     dataGridView1.Columns["status"].Visible = false;
-                    dataGridView1.Columns["created_at"].Visible = false;
+                   // dataGridView1.Columns["created_at"].Visible = false;
 
                     // Format the StudyPrice column
                     dataGridView1.Columns["studyPrice"].DefaultCellStyle.Format = "N2";
