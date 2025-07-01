@@ -101,7 +101,7 @@ namespace StudentManagementSystem
 
         private void HideColumns()
         {
-            string[] hidden = {"studentNameEN", "generation", "shift", "departmentID", "classroomID", "classroomName", "departmentName", "createdYear", "semester" };
+            string[] hidden = { "studentNameEN", "generation", "shift", "departmentID", "classroomID", "classroomName", "departmentName", "createdYear", "semester" };
             foreach (string col in hidden)
             {
                 if (dataOne.Columns.Contains(col))
@@ -457,20 +457,22 @@ namespace StudentManagementSystem
                             // 🔍 Lookup resultID
                             int? resultID = null;
                             using (var lookupCmd = new SqlCommand(@"
-                        SELECT resultID FROM tbResult 
-                        WHERE studentID = @studentID 
-                        AND subjectID = @subjectID 
-                        AND semester = @semester 
-                        AND YEAR(created_at) = @year", conn2))
+                            SELECT resultID FROM tbResult 
+                            WHERE studentID = @studentID 
+                              AND subjectID = @subjectID 
+                              AND semester = @semester 
+                              AND created_at = @created_at", conn2))
                             {
                                 lookupCmd.Parameters.AddWithValue("@studentID", studentID);
                                 lookupCmd.Parameters.AddWithValue("@subjectID", subjectID);
                                 lookupCmd.Parameters.AddWithValue("@semester", semester);
-                                lookupCmd.Parameters.AddWithValue("@year", createdAt.Year);
+                                lookupCmd.Parameters.AddWithValue("@created_at", createdAt);
                                 var res = lookupCmd.ExecuteScalar();
                                 if (res != null && res != DBNull.Value)
                                     resultID = Convert.ToInt32(res);
                             }
+
+
 
                             // ➕ Add row to DataTable
                             DataRow dr = dtScores.NewRow();
@@ -505,7 +507,7 @@ namespace StudentManagementSystem
                         param.TypeName = "dbo.ScoreTableType";
 
                         int rowsAffected = cmd2.ExecuteNonQuery();
-                        MessageBox.Show($"Scores saved successfully! Rows affected: {rowsAffected}");
+                        MessageBox.Show($"Scores saved successfully!");
                     }
                 }
             }
