@@ -35,6 +35,7 @@ namespace StudentManagementSystem
             btnNew.Click += btnNew_Click;
             btnRefresh.Click += btnRefresh_Click;
             SearchBar.KeyDown += txtSearchBar_KeyDown;
+            dgvStaff.CellClick += dgvStaff_CellClick;
         }
 
         //Button Insert
@@ -44,9 +45,7 @@ namespace StudentManagementSystem
             using (SqlConnection conn = HandleConnection.GetConnection())
             {
                 try
-                {
-                    //conn.Open();
-
+                { 
                     SqlCommand cmd = new SqlCommand("spInsertStaff", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -86,9 +85,7 @@ namespace StudentManagementSystem
             using (SqlConnection conn = HandleConnection.GetConnection())
             {
                 try
-                {
-                    //conn.Open();
-
+                { 
                     SqlCommand cmd = new SqlCommand("spUpdateStaff", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -132,9 +129,7 @@ namespace StudentManagementSystem
             {
                 using (var conn = HandleConnection.GetConnection())
                 {
-                    //if (conn.State != ConnectionState.Open)
-                    //    conn.Open();
-
+                  
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStaff", conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -210,8 +205,50 @@ namespace StudentManagementSystem
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+
             LoadData();
+            ClearForm();
         }
+
+        private void dgvStaff_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) 
+            {
+                DataGridViewRow row = dgvStaff.Rows[e.RowIndex];
+
+                txtStaffID.Text = row.Cells["staffID"].Value?.ToString();
+                txtNameKH.Text = row.Cells["staffNameKH"].Value?.ToString();
+                txtNameEN.Text = row.Cells["staffNameEN"].Value?.ToString();
+
+                string gender = row.Cells["GenderText"].Value?.ToString();
+                chkMale.Checked = gender == "Male";
+                chkFemale.Checked = gender == "Female";
+
+                txtAddress.Text = row.Cells["address"].Value?.ToString();
+
+                string role = row.Cells["RoleText"].Value?.ToString();
+                chkAdmin.Checked = role == "Admin";
+                chkStaff.Checked = role == "Staff";
+
+                txtEmail.Text = row.Cells["email"].Value?.ToString();
+                txtPhone.Text = row.Cells["phone"].Value?.ToString();
+
+                string salaryValue = row.Cells["salary"].Value?.ToString();
+                txtSalary.Text = string.IsNullOrWhiteSpace(salaryValue) ? "" : salaryValue; 
+                string status = row.Cells["StatusText"].Value?.ToString();
+                chkWork.Checked = status == "Work";
+                chkStopWork.Checked = status == "Stop Work";
+
+                dtpBirthDate.Value = row.Cells["birthdate"].Value == DBNull.Value
+                ? DateTime.Today
+                : Convert.ToDateTime(row.Cells["birthdate"].Value);
+
+                dtpHiredDate.Value = row.Cells["hireDate"].Value == DBNull.Value
+                    ? DateTime.Today
+                    : Convert.ToDateTime(row.Cells["hireDate"].Value);
+            }
+        }
+
 
 
 
@@ -233,7 +270,7 @@ namespace StudentManagementSystem
             dtpHiredDate.Value = DateTime.Today;
             chkWork.Checked = false;
             chkStopWork.Checked = false;
-
+            SearchBar.Clear();
         }
 
 
@@ -250,9 +287,6 @@ namespace StudentManagementSystem
                  
 
                 da.SelectCommand.Parameters.AddWithValue("@StaffID", SearchBar.Text);
-                da.SelectCommand.Parameters.AddWithValue("@Role", SearchBar.Text);
-
-
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
@@ -349,8 +383,8 @@ namespace StudentManagementSystem
             dgvStaff.Columns.Add("email", "Email");
             dgvStaff.Columns["email"].DataPropertyName = "email";
 
-            //dgvStaff.Columns.Add("password", "Password");
-            //dgvStaff.Columns["password"].DataPropertyName = "password";
+            dgvStaff.Columns.Add("password", "Password");
+            dgvStaff.Columns["password"].DataPropertyName = "password";
 
             dgvStaff.Columns.Add("phone", "Phone");
             dgvStaff.Columns["phone"].DataPropertyName = "phone";
@@ -363,6 +397,15 @@ namespace StudentManagementSystem
 
             dgvStaff.Columns.Add("StatusText", "Status");
             dgvStaff.Columns["StatusText"].DataPropertyName = "StatusText";
+        }
+        private void HideColumns()
+        {
+            string[] hidden = {  "password",  };
+            foreach (string col in hidden)
+            {
+                if (dgvStudent.Columns.Contains(col))
+                    dgvStudent.Columns[col].Visible = false;
+            }
         }
 
 
