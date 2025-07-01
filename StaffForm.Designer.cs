@@ -67,6 +67,7 @@
             panel1 = new Panel();
             label17 = new Label();
             groupBox1 = new GroupBox();
+            btnRefresh = new Button();
             label12 = new Label();
             txtPassword = new TextBox();
             chkAdmin = new CheckBox();
@@ -76,7 +77,6 @@
             chkFemale = new CheckBox();
             label6 = new Label();
             chkWork = new CheckBox();
-            btnRefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvStaff).BeginInit();
             panel1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -86,7 +86,7 @@
             // 
             btnLogout.BackColor = Color.FromArgb(192, 0, 0);
             btnLogout.ForeColor = SystemColors.ButtonHighlight;
-            btnLogout.Location = new Point(1010, 272);
+            btnLogout.Location = new Point(1010, 289);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(129, 47);
             btnLogout.TabIndex = 176;
@@ -107,7 +107,7 @@
             // 
             btnUpdate.BackColor = Color.Navy;
             btnUpdate.ForeColor = SystemColors.ButtonHighlight;
-            btnUpdate.Location = new Point(864, 272);
+            btnUpdate.Location = new Point(864, 289);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(129, 47);
             btnUpdate.TabIndex = 174;
@@ -118,7 +118,7 @@
             // 
             btnInsert.BackColor = Color.Green;
             btnInsert.ForeColor = SystemColors.ButtonHighlight;
-            btnInsert.Location = new Point(718, 272);
+            btnInsert.Location = new Point(718, 289);
             btnInsert.Name = "btnInsert";
             btnInsert.Size = new Size(124, 47);
             btnInsert.TabIndex = 173;
@@ -170,10 +170,10 @@
             // 
             dgvStaff.BackgroundColor = SystemColors.ActiveBorder;
             dgvStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStaff.Location = new Point(6, 352);
+            dgvStaff.Location = new Point(6, 374);
             dgvStaff.Name = "dgvStaff";
             dgvStaff.RowHeadersWidth = 51;
-            dgvStaff.Size = new Size(1451, 480);
+            dgvStaff.Size = new Size(1451, 458);
             dgvStaff.TabIndex = 156;
             // 
             // label9
@@ -196,23 +196,23 @@
             dtpHiredDate.Location = new Point(833, 185);
             dtpHiredDate.Name = "dtpHiredDate";
             dtpHiredDate.Size = new Size(264, 27);
-            dtpHiredDate.TabIndex = 169;
+            dtpHiredDate.TabIndex = 144;
             // 
             // SearchBar
             // 
-            SearchBar.Location = new Point(204, 310);
+            SearchBar.Location = new Point(319, 316);
             SearchBar.Name = "SearchBar";
-            SearchBar.Size = new Size(447, 27);
+            SearchBar.Size = new Size(310, 27);
             SearchBar.TabIndex = 154;
             // 
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(135, 313);
+            label15.Location = new Point(232, 319);
             label15.Name = "label15";
-            label15.Size = new Size(56, 20);
+            label15.Size = new Size(75, 20);
             label15.TabIndex = 155;
-            label15.Text = "Search:";
+            label15.Text = "Search ID:";
             // 
             // StaffID
             // 
@@ -376,7 +376,7 @@
             txtEmail.Location = new Point(833, 26);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(457, 27);
-            txtEmail.TabIndex = 141;
+            txtEmail.TabIndex = 140;
             // 
             // panel2
             // 
@@ -458,6 +458,17 @@
             groupBox1.TabIndex = 180;
             groupBox1.TabStop = false;
             // 
+            // btnRefresh
+            // 
+            btnRefresh.BackColor = Color.LightGray;
+            btnRefresh.ForeColor = SystemColors.ActiveCaptionText;
+            btnRefresh.Location = new Point(134, 312);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(81, 34);
+            btnRefresh.TabIndex = 196;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = false;
+            // 
             // label12
             // 
             label12.AutoSize = true;
@@ -472,7 +483,7 @@
             txtPassword.Location = new Point(833, 64);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(457, 27);
-            txtPassword.TabIndex = 194;
+            txtPassword.TabIndex = 141;
             // 
             // chkAdmin
             // 
@@ -498,7 +509,7 @@
             // 
             btnNew.BackColor = Color.DimGray;
             btnNew.ForeColor = SystemColors.ButtonHighlight;
-            btnNew.Location = new Point(1161, 272);
+            btnNew.Location = new Point(1161, 289);
             btnNew.Name = "btnNew";
             btnNew.Size = new Size(129, 47);
             btnNew.TabIndex = 191;
@@ -542,17 +553,6 @@
             chkWork.TabIndex = 185;
             chkWork.Text = "Work";
             chkWork.UseVisualStyleBackColor = true;
-            // 
-            // btnRefresh
-            // 
-            btnRefresh.BackColor = Color.LightGray;
-            btnRefresh.ForeColor = SystemColors.ActiveCaptionText;
-            btnRefresh.Location = new Point(1161, 194);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(129, 47);
-            btnRefresh.TabIndex = 196;
-            btnRefresh.Text = "Refresh";
-            btnRefresh.UseVisualStyleBackColor = false;
             // 
             // Staff_sForm
             // 
