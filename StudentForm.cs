@@ -53,7 +53,7 @@ namespace StudentManagementSystem
                  
                 cmd.Parameters.AddWithValue("@NameEN", txtNameEN.Text);
                 cmd.Parameters.AddWithValue("@NameKH", txtNameKH.Text);
-                cmd.Parameters.AddWithValue("@Gender", chkMale.Checked ? 0 : 1);
+                cmd.Parameters.AddWithValue("@Gender", chkMale.Checked ? 1 : 0);
                 cmd.Parameters.AddWithValue("@BirthDate", dtpBirthDate.Value);
                 cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
                 cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
@@ -96,7 +96,7 @@ namespace StudentManagementSystem
                     SqlCommand cmd = new SqlCommand("spUpdateStudent", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    // ✅ Use existing StudentID from textbox
+                    //  Use existing StudentID from textbox
                     cmd.Parameters.AddWithValue("@StudentID", txtStudentID.Text);
 
                     cmd.Parameters.AddWithValue("@NameEN", txtNameEN.Text);
@@ -244,6 +244,7 @@ namespace StudentManagementSystem
             chkStopStudy.Checked = false;
             cboDepartmentID.SelectedIndex = -1;
             cboClassID.SelectedIndex = -1;
+            txtSearch.Clear();
         }
          
         private void LoadData()
@@ -317,7 +318,7 @@ namespace StudentManagementSystem
                 daDept.Fill(dtDept);
                 cboDepartmentID.DataSource = dtDept;
                 cboDepartmentID.ValueMember = "departmentID";
-                //cboDepartmentID.DisplayMember = "departmentName"; //  
+                cboDepartmentID.DisplayMember = "departmentName"; //  
                 cboDepartmentID.SelectedIndex = -1;
 
                 SqlDataAdapter daClass = new SqlDataAdapter("SELECT classroomID, classroomName FROM tbClassroom", conn);
@@ -325,7 +326,7 @@ namespace StudentManagementSystem
                 daClass.Fill(dtClass);
                 cboClassID.DataSource = dtClass;
                 cboClassID.ValueMember = "classroomID";
-                //cboClassID.DisplayMember = "classroomName";
+                cboClassID.DisplayMember = "classroomName";
                 cboClassID.SelectedIndex = -1;
 
             }
@@ -381,7 +382,18 @@ namespace StudentManagementSystem
             dgvStudent.Columns["departmentID"].DataPropertyName = "departmentID";
 
             dgvStudent.Columns.Add("classroomID", "Class ID");
-            dgvStudent.Columns["classroomID"].DataPropertyName = "classroomID"; 
+            dgvStudent.Columns["classroomID"].DataPropertyName = "classroomID";
+            HideColumns();
+        }
+
+        private void HideColumns()
+        {
+            string[] hidden = { "departmentID", "classroomID","address", "enterDate", "birthAddress" };
+            foreach (string col in hidden)
+            {
+                if (dgvStudent.Columns.Contains(col))
+                    dgvStudent.Columns[col].Visible = false;
+            }
         }
 
         //Generate ID 

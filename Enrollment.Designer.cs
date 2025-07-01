@@ -34,10 +34,10 @@
             chkFemale = new CheckBox();
             cboDepartmentID = new ComboBox();
             label6 = new Label();
-            chkStudy = new CheckBox();
+            chkActive = new CheckBox();
             txtParentPhone = new TextBox();
             btnLogout = new Button();
-            chkStopStudy = new CheckBox();
+            chkInactive = new CheckBox();
             btnUpdate = new Button();
             btnInsert = new Button();
             label20 = new Label();
@@ -129,7 +129,7 @@
             cboDepartmentID.Location = new Point(892, 331);
             cboDepartmentID.Name = "cboDepartmentID";
             cboDepartmentID.Size = new Size(348, 28);
-            cboDepartmentID.TabIndex = 227;
+            cboDepartmentID.TabIndex = 224;
             // 
             // label6
             // 
@@ -140,15 +140,15 @@
             label6.TabIndex = 241;
             label6.Text = "Department ID:";
             // 
-            // chkStudy
+            // chkActive
             // 
-            chkStudy.AutoSize = true;
-            chkStudy.Location = new Point(891, 292);
-            chkStudy.Name = "chkStudy";
-            chkStudy.Size = new Size(68, 24);
-            chkStudy.TabIndex = 226;
-            chkStudy.Text = "Study";
-            chkStudy.UseVisualStyleBackColor = true;
+            chkActive.AutoSize = true;
+            chkActive.Location = new Point(891, 292);
+            chkActive.Name = "chkActive";
+            chkActive.Size = new Size(68, 24);
+            chkActive.TabIndex = 223;
+            chkActive.Text = "Study";
+            chkActive.UseVisualStyleBackColor = true;
             // 
             // txtParentPhone
             // 
@@ -168,15 +168,15 @@
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = false;
             // 
-            // chkStopStudy
+            // chkInactive
             // 
-            chkStopStudy.AutoSize = true;
-            chkStopStudy.Location = new Point(974, 292);
-            chkStopStudy.Name = "chkStopStudy";
-            chkStopStudy.Size = new Size(103, 24);
-            chkStopStudy.TabIndex = 240;
-            chkStopStudy.Text = "Stop Study";
-            chkStopStudy.UseVisualStyleBackColor = true;
+            chkInactive.AutoSize = true;
+            chkInactive.Location = new Point(974, 292);
+            chkInactive.Name = "chkInactive";
+            chkInactive.Size = new Size(103, 24);
+            chkInactive.TabIndex = 240;
+            chkInactive.Text = "Stop Study";
+            chkInactive.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
@@ -415,7 +415,6 @@
             dgvEnrollment.RowHeadersWidth = 51;
             dgvEnrollment.Size = new Size(1440, 281);
             dgvEnrollment.TabIndex = 250;
-            dgvEnrollment.CellContentClick += dgvStudent_CellContentClick;
             // 
             // panel2
             // 
@@ -431,7 +430,7 @@
             chkPass.Location = new Point(891, 174);
             chkPass.Name = "chkPass";
             chkPass.Size = new Size(58, 24);
-            chkPass.TabIndex = 253;
+            chkPass.TabIndex = 220;
             chkPass.Text = "Pass";
             chkPass.UseVisualStyleBackColor = true;
             // 
@@ -467,7 +466,7 @@
             txtScore.Location = new Point(891, 89);
             txtScore.Name = "txtScore";
             txtScore.Size = new Size(348, 27);
-            txtScore.TabIndex = 257;
+            txtScore.TabIndex = 218;
             // 
             // label25
             // 
@@ -499,7 +498,7 @@
             dtpEnrollDate.Location = new Point(891, 253);
             dtpEnrollDate.Name = "dtpEnrollDate";
             dtpEnrollDate.Size = new Size(348, 27);
-            dtpEnrollDate.TabIndex = 259;
+            dtpEnrollDate.TabIndex = 222;
             // 
             // label7
             // 
@@ -534,10 +533,10 @@
             Controls.Add(txtGrade);
             Controls.Add(label18);
             Controls.Add(label6);
-            Controls.Add(chkStudy);
+            Controls.Add(chkActive);
             Controls.Add(txtParentPhone);
             Controls.Add(btnLogout);
-            Controls.Add(chkStopStudy);
+            Controls.Add(chkInactive);
             Controls.Add(btnUpdate);
             Controls.Add(btnInsert);
             Controls.Add(label20);
@@ -581,10 +580,10 @@
         private CheckBox chkFemale;
         private ComboBox cboDepartmentID;
         private Label label6;
-        private CheckBox chkStudy;
+        private CheckBox chkActive;
         private TextBox txtParentPhone;
         private Button btnLogout;
-        private CheckBox chkStopStudy;
+        private CheckBox chkInactive;
         private Button btnUpdate;
         private Button btnInsert;
         private Label label20;
