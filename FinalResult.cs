@@ -22,6 +22,11 @@ namespace StudentManagementSystem
             cbshift.SelectedIndexChanged += ComboBoxes_SelectionChanged;
             cbsemester.SelectedIndexChanged += ComboBoxes_SelectionChanged;
         }
+        private void Logout(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
         private void LoadComboBoxes()
         {
             isLoading = true;
@@ -60,7 +65,7 @@ namespace StudentManagementSystem
 
 
             // 3. Generations with "All Generations"
-            using (var cmd = new SqlCommand("SELECT DISTINCT generation FROM tbClassroom ORDER BY generation", conn))
+            using (var cmd = new SqlCommand("SELECT DISTINCT generation FROM tbStudent ORDER BY generation", conn))
             using (var reader = cmd.ExecuteReader())
             {
                 var dt = new DataTable();

@@ -33,12 +33,20 @@ namespace StudentManagementSystem
             dataOne.DataError += (s, e) => { e.ThrowException = false; };
 
             this.Load += Form1_Load;
+<<<<<<< HEAD
             btnClear.Click += Form1_Load;
             close.Click += formClose;
         }
         private void formClose(object sender, EventArgs e)
         {
                this.Close();
+=======
+            Cancel.Click += logout;
+        }
+        private void logout(object sender, EventArgs e)
+        {
+            this.Close();
+>>>>>>> StaffStudent
         }
         private void Form1_Load(object sender, EventArgs e)
         {
