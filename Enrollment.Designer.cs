@@ -575,7 +575,6 @@
             Controls.Add(txtPhone);
             Name = "Enrollment";
             Text = "Enrollment";
-            Load += Enrollment_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvEnrollment).EndInit();

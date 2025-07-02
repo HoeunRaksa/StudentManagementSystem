@@ -21,6 +21,8 @@ namespace StudentManagementSystem
             InitializeComponent();
             LoadData();
             LoadComboBoxes();
+            LoadDepartments();
+            
             txtStudentID.ReadOnly = true;
             dgvStudent.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.KeyPreview = true;
@@ -37,9 +39,9 @@ namespace StudentManagementSystem
             chkStopStudy.CheckedChanged += chkStopStudy_CheckedChanged;
             chkMale.CheckedChanged += chkMale_CheckedChanged;
             chkFemale.CheckedChanged += chkFemale_CheckedChanged;
-        }
-
-       //Button Insert 
+            cboDepartmentID.SelectedIndexChanged += cboDepartmentID_SelectedIndexChanged; 
+        } 
+        //Button Insert 
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
@@ -137,15 +139,15 @@ namespace StudentManagementSystem
         {
             LoadData();
             ClearForm();
-        } 
+            txtStudentID.Clear(); 
+        }
 
         //Button New
         private void btnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
             LoadData();
-        }
-
+        } 
         private void SearchStudent()
         {
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
@@ -159,9 +161,7 @@ namespace StudentManagementSystem
                 da.SelectCommand.Parameters.AddWithValue("@StudentID", txtSearch.Text.Trim());
 
                 DataTable dt = new DataTable();
-                da.Fill(dt);
-
-
+                da.Fill(dt); 
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
@@ -210,15 +210,7 @@ namespace StudentManagementSystem
                     MessageBox.Show("Student not found.");
                 } 
             }
-        } 
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SearchStudent();
-            }
-        }
+        }  
         private void ClearForm()
         {
             txtStudentID.Text = GenerateStudentID(); // Auto-generate ID here
@@ -261,15 +253,24 @@ namespace StudentManagementSystem
 
                         bool isStudying = row["status"].ToString() == "True" || row["status"].ToString() == "1";
                         row["StatusText"] = isStudying ? "Study" : "Stop Study";
-                    }  
-                    sub_LoadData(); 
+                    }
+                    txtStudentID.Text = GenerateStudentID(); // Auto-generate ID here   
 
+                    sub_LoadData();  
                     dgvStudent.DataSource = dt;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Load failed: " + ex.Message);
+            }
+        }
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SearchStudent();
             }
         }
         private void Student_sForm_KeyDown(object sender, KeyEventArgs e)
@@ -292,31 +293,7 @@ namespace StudentManagementSystem
                     nextControl = GetNextControl(nextControl, true); 
                 }
             }
-        }
-
-        private void LoadComboBoxes()
-        {
-            using (SqlConnection conn = HandleConnection.GetConnection())
-            { 
-                SqlDataAdapter daDept = new SqlDataAdapter("SELECT departmentID, departmentName FROM tbDepartment", conn);
-                DataTable dtDept = new DataTable();
-                daDept.Fill(dtDept);
-                cboDepartmentID.DataSource = dtDept;
-                cboDepartmentID.ValueMember = "departmentID";
-                cboDepartmentID.DisplayMember = "departmentName"; 
-                cboDepartmentID.SelectedIndex = -1;
-
-                SqlDataAdapter daClass = new SqlDataAdapter("SELECT classroomID, classroomName FROM tbClassroom", conn);
-                DataTable dtClass = new DataTable();
-                daClass.Fill(dtClass);
-                cboClassID.DataSource = dtClass;
-                cboClassID.ValueMember = "classroomID";
-                cboClassID.DisplayMember = "classroomName";
-                cboClassID.SelectedIndex = -1;
-
-            }
-        }
-
+        } 
         private void sub_LoadData()
         {
             dgvStudent.DataSource = null;
@@ -368,9 +345,9 @@ namespace StudentManagementSystem
 
             dgvStudent.Columns.Add("classroomID", "Class ID");
             dgvStudent.Columns["classroomID"].DataPropertyName = "classroomID";
+            LoadDepartments(); 
             HideColumns();
-        }
-
+        } 
         private void HideColumns()
         {
             string[] hidden = { "departmentID", "classroomID","address", "enterDate", "birthAddress" };
@@ -379,9 +356,7 @@ namespace StudentManagementSystem
                 if (dgvStudent.Columns.Contains(col))
                     dgvStudent.Columns[col].Visible = false;
             }
-        }
-
-        //Generate ID  
+        }  
         private void dgvStudent_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -421,14 +396,12 @@ namespace StudentManagementSystem
                 if (row.Cells["classroomID"].Value != DBNull.Value)
                     cboClassID.SelectedValue = Convert.ToInt32(row.Cells["classroomID"].Value);
             }
-        }
-
+        } 
         private void chkMale_CheckedChanged(object sender, EventArgs e)
         {
             if (chkMale.Checked)
                 chkFemale.Checked = false;
-        }
-
+        }  
         private void chkFemale_CheckedChanged(object sender, EventArgs e)
         {
             if (chkFemale.Checked)
@@ -439,14 +412,64 @@ namespace StudentManagementSystem
         {
             if (chkStudy.Checked)
                 chkStopStudy.Checked = false;
-        }
-
+        } 
         private void chkStopStudy_CheckedChanged(object sender, EventArgs e)
         {
             if (chkStopStudy.Checked)
                 chkStudy.Checked = false;
-        }
+        } 
+        private void cboDepartmentID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboDepartmentID.SelectedValue != null && cboDepartmentID.SelectedIndex != -1)
+            {
+                string selectedDeptID = cboDepartmentID.SelectedValue.ToString();
+                LoadClassesByDepartment(selectedDeptID); 
+            } 
+        } 
+        private void LoadClassesByDepartment(string departmentID)
+        {
+            using (SqlConnection conn = HandleConnection.GetConnection())
+            {
+                string query = "SELECT classroomID, classroomName FROM tbClassroom WHERE DepartmentID = @DepartmentID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@DepartmentID", departmentID);
 
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cboClassID.DisplayMember = "classroomName";
+                cboClassID.ValueMember = "classroomID";
+                cboClassID.DataSource = dt; 
+            }
+        } 
+        private void LoadComboBoxes()
+        {
+            using (SqlConnection conn = HandleConnection.GetConnection())
+            {
+                SqlDataAdapter daDept = new SqlDataAdapter("SELECT departmentID, departmentName FROM tbDepartment", conn);
+                DataTable dtDept = new DataTable();
+                daDept.Fill(dtDept);
+                cboDepartmentID.DataSource = dtDept;
+                cboDepartmentID.ValueMember = "departmentID";
+                cboDepartmentID.DisplayMember = "departmentName";
+                cboDepartmentID.SelectedIndex = -1; 
+            }
+        }
+        private void LoadDepartments()
+        {
+            using (SqlConnection conn = HandleConnection.GetConnection())
+            {
+                string query = "SELECT departmentID, departmentName FROM tbDepartment";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cboDepartmentID.DisplayMember = "departmentName";
+                cboDepartmentID.ValueMember = "departmentID"; 
+                cboClassID.SelectedIndex = -1;
+            }
+        } 
         private string GenerateStudentID()
         {
             string newID = "ST0001";
@@ -464,8 +487,7 @@ namespace StudentManagementSystem
                     num++;
                     newID = "ST" + num.ToString("D4");
                 }
-            }
-
+            } 
             return newID;
         } 
     }
