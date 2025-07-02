@@ -60,7 +60,7 @@ namespace StudentManagementSystem
 
 
             // 3. Generations with "All Generations"
-            using (var cmd = new SqlCommand("SELECT DISTINCT generation FROM tbClassroom ORDER BY generation", conn))
+            using (var cmd = new SqlCommand("SELECT DISTINCT generation FROM tbStudent ORDER BY generation", conn))
             using (var reader = cmd.ExecuteReader())
             {
                 var dt = new DataTable();
