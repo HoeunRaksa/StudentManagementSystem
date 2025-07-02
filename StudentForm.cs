@@ -21,6 +21,8 @@ namespace StudentManagementSystem
             InitializeComponent();
             LoadData();
             LoadComboBoxes();
+            LoadDepartments();
+            
             txtStudentID.ReadOnly = true;
             dgvStudent.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.KeyPreview = true;
@@ -29,28 +31,29 @@ namespace StudentManagementSystem
             btnInsert.Click += btnInsert_Click;
             btnUpdate.Click += btnUpdate_Click;
             btnLogout.Click += btnLogOut_Click;
+            btnHome.Click += btnHome_Click;
             btnRefresh.Click += btnRefresh_Click;
             btnNew.Click += btnNew_Click;
-        }
-
-       //Button Insert 
+            dgvStudent.CellClick += dgvStudent_CellClick;
+            chkStudy.CheckedChanged += chkStudy_CheckedChanged;
+            chkStopStudy.CheckedChanged += chkStopStudy_CheckedChanged;
+            chkMale.CheckedChanged += chkMale_CheckedChanged;
+            chkFemale.CheckedChanged += chkFemale_CheckedChanged;
+            cboDepartmentID.SelectedIndexChanged += cboDepartmentID_SelectedIndexChanged; 
+        } 
+        //Button Insert 
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = HandleConnection.GetConnection();
-
+            SqlConnection conn = HandleConnection.GetConnection(); 
             try
-            {
-                //if (conn.State != ConnectionState.Open)
-                //    conn.Open();
-
+            { 
                 SqlCommand cmd = new SqlCommand("spInsertStudent", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 string newStudentID = GenerateStudentID();  // now uses its own connection
 
-                cmd.Parameters.AddWithValue("@StudentID", newStudentID);
-                 
+                cmd.Parameters.AddWithValue("@StudentID", newStudentID); 
                 cmd.Parameters.AddWithValue("@NameEN", txtNameEN.Text);
                 cmd.Parameters.AddWithValue("@NameKH", txtNameKH.Text);
                 cmd.Parameters.AddWithValue("@Gender", chkMale.Checked ? 1 : 0);
@@ -81,24 +84,16 @@ namespace StudentManagementSystem
                     conn.Close();
             }
         } 
-        
-        //Button Update
-
+        //Button Update 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             using (var conn = HandleConnection.GetConnection())
             {
                 try
-                {
-                    //if (conn.State != ConnectionState.Open)
-                    //    conn.Open();
-
+                { 
                     SqlCommand cmd = new SqlCommand("spUpdateStudent", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    //  Use existing StudentID from textbox
-                    cmd.Parameters.AddWithValue("@StudentID", txtStudentID.Text);
-
+                    cmd.CommandType = CommandType.StoredProcedure; 
+                    cmd.Parameters.AddWithValue("@StudentID", txtStudentID.Text); 
                     cmd.Parameters.AddWithValue("@NameEN", txtNameEN.Text);
                     cmd.Parameters.AddWithValue("@NameKH", txtNameKH.Text);
                     cmd.Parameters.AddWithValue("@Gender", chkMale.Checked ? 1 : 0);
@@ -125,46 +120,48 @@ namespace StudentManagementSystem
                     MessageBox.Show("Update failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
-
+        } 
         //Button Logout
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            //Form1 fm1 = new Form1();
-            //fm1.Show();
-            //this.Hide();
+            Login li = new Login();
+            li.Show();
+            this.Hide();
+        }
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            Main mn = new Main();
+            mn.Show();
+            this.Hide();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadData();
+            ClearForm();
+            txtStudentID.Clear(); 
         }
 
         //Button New
         private void btnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
-        }
-
+            LoadData();
+        } 
         private void SearchStudent()
         {
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
             {
-                LoadData(); // Show all students if search box is empty
-                return;     // Exit the method early
+                LoadData();  
+                return;    
             }
             using (var conn = HandleConnection.GetConnection())
-            {
-                //if (conn.State != ConnectionState.Open)
-                //    conn.Open();
-
+            { 
                 SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStudent WHERE studentID = @StudentID", conn);
                 da.SelectCommand.Parameters.AddWithValue("@StudentID", txtSearch.Text.Trim());
 
                 DataTable dt = new DataTable();
-                da.Fill(dt);
-
-
+                da.Fill(dt); 
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
@@ -202,8 +199,7 @@ namespace StudentManagementSystem
                     {
                         r["GenderText"] = r["gender"].ToString() == "1" ? "Male" : "Female";
                         r["StatusText"] = r["status"].ToString() == "1" ? "Study" : "Stop Study";
-                    }
-
+                    } 
                     // Display in DataGridView
                     sub_LoadData(); 
 
@@ -214,16 +210,7 @@ namespace StudentManagementSystem
                     MessageBox.Show("Student not found.");
                 } 
             }
-        }
-
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SearchStudent();
-            }
-        }
+        }  
         private void ClearForm()
         {
             txtStudentID.Text = GenerateStudentID(); // Auto-generate ID here
@@ -245,25 +232,20 @@ namespace StudentManagementSystem
             cboDepartmentID.SelectedIndex = -1;
             cboClassID.SelectedIndex = -1;
             txtSearch.Clear();
-        }
-         
+        } 
         private void LoadData()
         {
             try
             {
                 using (var conn = HandleConnection.GetConnection())
                 {
-                    //if (conn.State != ConnectionState.Open)
-                    //    conn.Open();
-
+                  
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStudent", conn);
                     DataTable dt = new DataTable();
-                    da.Fill(dt);
-
+                    da.Fill(dt); 
                     // Add extra columns for text display
                     dt.Columns.Add("GenderText", typeof(string));
-                    dt.Columns.Add("StatusText", typeof(string));
-
+                    dt.Columns.Add("StatusText", typeof(string)); 
                     foreach (DataRow row in dt.Rows)
                     {
                         bool isMale = row["gender"].ToString() == "True" || row["gender"].ToString() == "1";
@@ -272,16 +254,23 @@ namespace StudentManagementSystem
                         bool isStudying = row["status"].ToString() == "True" || row["status"].ToString() == "1";
                         row["StatusText"] = isStudying ? "Study" : "Stop Study";
                     }
+                    txtStudentID.Text = GenerateStudentID(); // Auto-generate ID here   
 
-                    // Bind to DataGridView
-                    sub_LoadData(); 
-
+                    sub_LoadData();  
                     dgvStudent.DataSource = dt;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Load failed: " + ex.Message);
+            }
+        }
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SearchStudent();
             }
         }
         private void Student_sForm_KeyDown(object sender, KeyEventArgs e)
@@ -301,37 +290,10 @@ namespace StudentManagementSystem
                         nextControl.Focus();
                         break;
                     } 
-                    nextControl = GetNextControl(nextControl, true); // skip and look further
+                    nextControl = GetNextControl(nextControl, true); 
                 }
             }
-        }
-
-        private void LoadComboBoxes()
-        {
-            using (SqlConnection conn = HandleConnection.GetConnection())
-            {
-                //if (conn.State != ConnectionState.Open)
-                //    conn.Open();
-
-                SqlDataAdapter daDept = new SqlDataAdapter("SELECT departmentID, departmentName FROM tbDepartment", conn);
-                DataTable dtDept = new DataTable();
-                daDept.Fill(dtDept);
-                cboDepartmentID.DataSource = dtDept;
-                cboDepartmentID.ValueMember = "departmentID";
-                cboDepartmentID.DisplayMember = "departmentName"; //  
-                cboDepartmentID.SelectedIndex = -1;
-
-                SqlDataAdapter daClass = new SqlDataAdapter("SELECT classroomID, classroomName FROM tbClassroom", conn);
-                DataTable dtClass = new DataTable();
-                daClass.Fill(dtClass);
-                cboClassID.DataSource = dtClass;
-                cboClassID.ValueMember = "classroomID";
-                cboClassID.DisplayMember = "classroomName";
-                cboClassID.SelectedIndex = -1;
-
-            }
-        }
-
+        } 
         private void sub_LoadData()
         {
             dgvStudent.DataSource = null;
@@ -383,9 +345,9 @@ namespace StudentManagementSystem
 
             dgvStudent.Columns.Add("classroomID", "Class ID");
             dgvStudent.Columns["classroomID"].DataPropertyName = "classroomID";
+            LoadDepartments(); 
             HideColumns();
-        }
-
+        } 
         private void HideColumns()
         {
             string[] hidden = { "departmentID", "classroomID","address", "enterDate", "birthAddress" };
@@ -394,9 +356,120 @@ namespace StudentManagementSystem
                 if (dgvStudent.Columns.Contains(col))
                     dgvStudent.Columns[col].Visible = false;
             }
+        }  
+        private void dgvStudent_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvStudent.Rows[e.RowIndex];
+
+                txtStudentID.Text = row.Cells["studentID"].Value?.ToString();
+                txtNameEN.Text = row.Cells["studentNameEN"].Value?.ToString();
+                txtNameKH.Text = row.Cells["studentNameKH"].Value?.ToString();
+
+                string gender = row.Cells["GenderText"].Value?.ToString();
+                chkMale.Checked = gender == "Male";
+                chkFemale.Checked = gender == "Female";
+
+                if (row.Cells["birthdate"].Value != DBNull.Value)
+                    dtpBirthDate.Value = Convert.ToDateTime(row.Cells["birthdate"].Value);
+
+                txtEmail.Text = row.Cells["email"].Value?.ToString();
+                txtPhone.Text = row.Cells["phone"].Value?.ToString();
+                txtParentPhone.Text = row.Cells["parentPhone"].Value?.ToString();
+                txtBirthAddress.Text = row.Cells["birthAddress"].Value?.ToString();
+                txtAddress.Text = row.Cells["address"].Value?.ToString();
+
+                if (row.Cells["enterDate"].Value != DBNull.Value)
+                    dtpEnterDate.Value = Convert.ToDateTime(row.Cells["enterDate"].Value);
+
+                txtGeneration.Text = row.Cells["generation"].Value?.ToString();
+
+                string status = row.Cells["StatusText"].Value?.ToString();
+                chkStudy.Checked = status == "Study";
+                chkStopStudy.Checked = status == "Stop Study";
+
+                // Use Value instead of Text for ComboBoxes
+                if (row.Cells["departmentID"].Value != DBNull.Value)
+                    cboDepartmentID.SelectedValue = Convert.ToInt32(row.Cells["departmentID"].Value);
+
+                if (row.Cells["classroomID"].Value != DBNull.Value)
+                    cboClassID.SelectedValue = Convert.ToInt32(row.Cells["classroomID"].Value);
+            }
+        } 
+        private void chkMale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMale.Checked)
+                chkFemale.Checked = false;
+        }  
+        private void chkFemale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFemale.Checked)
+                chkMale.Checked = false;
         }
 
-        //Generate ID 
+        private void chkStudy_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStudy.Checked)
+                chkStopStudy.Checked = false;
+        } 
+        private void chkStopStudy_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStopStudy.Checked)
+                chkStudy.Checked = false;
+        } 
+        private void cboDepartmentID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboDepartmentID.SelectedValue != null && cboDepartmentID.SelectedIndex != -1)
+            {
+                string selectedDeptID = cboDepartmentID.SelectedValue.ToString();
+                LoadClassesByDepartment(selectedDeptID); 
+            } 
+        } 
+        private void LoadClassesByDepartment(string departmentID)
+        {
+            using (SqlConnection conn = HandleConnection.GetConnection())
+            {
+                string query = "SELECT classroomID, classroomName FROM tbClassroom WHERE DepartmentID = @DepartmentID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@DepartmentID", departmentID);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cboClassID.DisplayMember = "classroomName";
+                cboClassID.ValueMember = "classroomID";
+                cboClassID.DataSource = dt; 
+            }
+        } 
+        private void LoadComboBoxes()
+        {
+            using (SqlConnection conn = HandleConnection.GetConnection())
+            {
+                SqlDataAdapter daDept = new SqlDataAdapter("SELECT departmentID, departmentName FROM tbDepartment", conn);
+                DataTable dtDept = new DataTable();
+                daDept.Fill(dtDept);
+                cboDepartmentID.DataSource = dtDept;
+                cboDepartmentID.ValueMember = "departmentID";
+                cboDepartmentID.DisplayMember = "departmentName";
+                cboDepartmentID.SelectedIndex = -1; 
+            }
+        }
+        private void LoadDepartments()
+        {
+            using (SqlConnection conn = HandleConnection.GetConnection())
+            {
+                string query = "SELECT departmentID, departmentName FROM tbDepartment";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cboDepartmentID.DisplayMember = "departmentName";
+                cboDepartmentID.ValueMember = "departmentID"; 
+                cboClassID.SelectedIndex = -1;
+            }
+        } 
         private string GenerateStudentID()
         {
             string newID = "ST0001";
@@ -414,8 +487,7 @@ namespace StudentManagementSystem
                     num++;
                     newID = "ST" + num.ToString("D4");
                 }
-            }
-
+            } 
             return newID;
         } 
     }

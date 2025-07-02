@@ -1,4 +1,6 @@
+using System;
 using System.Data;
+using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using StudentManagementSysytem;
 
@@ -39,12 +41,21 @@ namespace StudentManagementSystem
                 comboBox3.ValueMember = "StaffID";
 
                 // Role
-                SqlDataAdapter roleAdapter = new SqlDataAdapter("SELECT DISTINCT Role FROM tbStaff WHERE Status = 1", conn);
+                SqlDataAdapter roleAdapter = new SqlDataAdapter(@"SELECT DISTINCT 
+           CASE 
+            WHEN Role = 1 THEN 'Admin'
+            WHEN Role = 0 THEN 'Staff'
+            ELSE 'Unknown'
+                END AS RoleDisplay,
+                 Role AS RoleValue
+                 FROM tbStaff
+                 WHERE Status = 1", conn);
                 DataTable dtRole = new DataTable();
                 roleAdapter.Fill(dtRole);
+
                 comboBox2.DataSource = dtRole;
-                comboBox2.DisplayMember = "Role";
-                comboBox2.ValueMember = "Role";
+                comboBox2.DisplayMember = "RoleDisplay"; // What user sees
+                comboBox2.ValueMember = "RoleValue"; 
 
                 // Department
                 SqlDataAdapter deptNameAdapter = new SqlDataAdapter("SELECT DepartmentID, DepartmentName FROM tbDepartment", conn);
@@ -113,8 +124,8 @@ namespace StudentManagementSystem
                     cmd.Parameters.AddWithValue("@Date", dateTimePicker1.Value);
                     cmd.Parameters.AddWithValue("@StaffID", comboBox1.SelectedValue);
                     cmd.Parameters.AddWithValue("@Role", comboBox2.Text);
-                    cmd.Parameters.AddWithValue("@DepartmentID", Convert.ToInt32(comboBox4.SelectedValue)); 
-                    cmd.Parameters.AddWithValue("@DepartmentName", comboBox4.Text);                         
+                    cmd.Parameters.AddWithValue("@DepartmentID", Convert.ToInt32(comboBox4.SelectedValue));  // ✅ INT
+                    cmd.Parameters.AddWithValue("@DepartmentName", comboBox4.Text);                         // ✅ STRING
 
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Insert successful.", "Success");
@@ -132,39 +143,51 @@ namespace StudentManagementSystem
         // Update
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            // Check if an analyst row is selected
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+            // Validate AnalystID as string
+            string analystId = selectedRow.Cells["AnalystID"]?.Value?.ToString();
+            if (string.IsNullOrEmpty(analystId))
+            {
+                MessageBox.Show("Selected Analyst ID is invalid.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             using (SqlConnection conn = HandleConnection.GetConnection())
             {
                 if (conn == null) return;
 
                 try
                 {
-                    if (!int.TryParse(textBox1.Text, out int analystId))
-                    {
-                        MessageBox.Show("Please select a valid Analyst to update.");
-                        return;
-                    }
-
                     SqlCommand cmd = new SqlCommand("spUpdateAnalyst", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@AnalystID", analystId);
+                    cmd.Parameters.AddWithValue("@AnalystID", analystId); // Use string for AnalystID
                     cmd.Parameters.AddWithValue("@AnalystReport", textBox2.Text.Trim());
                     cmd.Parameters.AddWithValue("@Date", dateTimePicker1.Value);
                     cmd.Parameters.AddWithValue("@StaffID", comboBox1.SelectedValue);
                     cmd.Parameters.AddWithValue("@Role", comboBox2.Text);
-                    cmd.Parameters.AddWithValue("@DepartmentID", Convert.ToInt32(comboBox4.SelectedValue));  
-                    cmd.Parameters.AddWithValue("@DepartmentName", comboBox4.Text);
+                    cmd.Parameters.AddWithValue("@DepartmentID", Convert.ToInt32(comboBox4.SelectedValue));
+                    cmd.Parameters.AddWithValue("@DepartmentName", comboBox4.Text); // Optional, if required by your SP
 
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Update successful.", "Success");
-                    LoadAnalystData();
+
+                    MessageBox.Show("Update successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadAnalystData(); // Refresh your DataGridView
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Update failed: " + ex.Message);
+                    MessageBox.Show("Update failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
 
         // New (Clear)
         private void btnNew_Click(object sender, EventArgs e)
@@ -190,29 +213,35 @@ namespace StudentManagementSystem
         // Populate form when selecting a row in DataGridView
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow == null) return;
+            if (dataGridView1.CurrentRow == null || dataGridView1.CurrentRow.Index < 0)
+                return;
 
             var row = dataGridView1.CurrentRow;
 
-            textBox1.Text = row.Cells["AnalystID"].Value?.ToString();
-            textBox2.Text = row.Cells["AnalystReport"].Value?.ToString();
+            // Make sure AnalystID is selected properly
+            string analystId = row.Cells["AnalystID"]?.Value?.ToString();
+            if (string.IsNullOrEmpty(analystId))
+            {
+                return;
+            }
 
-            if (row.Cells["Date"].Value != DBNull.Value)
+            // Set TextBox1 with AnalystID
+            textBox1.Text = analystId;
+
+            // Set the other fields from the selected row
+            textBox2.Text = row.Cells["AnalystReport"]?.Value?.ToString() ?? string.Empty;
+
+            if (row.Cells["Date"]?.Value != DBNull.Value)
                 dateTimePicker1.Value = Convert.ToDateTime(row.Cells["Date"].Value);
             else
                 dateTimePicker1.Value = DateTime.Now;
 
-            if (row.Cells["StaffID"].Value != DBNull.Value)
-                comboBox1.SelectedValue = row.Cells["StaffID"].Value;
-
-            if (row.Cells["Role"].Value != DBNull.Value)
-                comboBox2.Text = row.Cells["Role"].Value.ToString();
-
-            if (row.Cells["DepartmentID"].Value != DBNull.Value)
-                comboBox4.SelectedValue = row.Cells["DepartmentID"].Value;
+            // Set StaffID, Role, and DepartmentID safely
+            comboBox1.SelectedValue = row.Cells["StaffID"]?.Value;
+            comboBox2.Text = row.Cells["Role"]?.Value?.ToString() ?? string.Empty;
+            comboBox4.SelectedValue = row.Cells["DepartmentID"]?.Value;
         }
-
-
+        
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Optional: handle event or remove it if unused

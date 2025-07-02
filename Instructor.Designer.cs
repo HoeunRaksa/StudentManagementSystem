@@ -1,6 +1,6 @@
 namespace StudentManagementSystem
 {
-    partial class Instructor
+    partial class Instructor : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -35,12 +35,10 @@ namespace StudentManagementSystem
             lblNameEN = new System.Windows.Forms.Label();
             txtNameEN = new System.Windows.Forms.TextBox();
             lblGender = new System.Windows.Forms.Label();
-            txtGender = new System.Windows.Forms.TextBox();
             lblBirthDate = new System.Windows.Forms.Label();
             lblAddress = new System.Windows.Forms.Label();
             txtAddress = new System.Windows.Forms.TextBox();
             lblEmail = new System.Windows.Forms.Label();
-            txtEmail = new System.Windows.Forms.TextBox();
             lblPhone = new System.Windows.Forms.Label();
             txtPhone = new System.Windows.Forms.TextBox();
             lblDepartment = new System.Windows.Forms.Label();
@@ -58,6 +56,8 @@ namespace StudentManagementSystem
             dateTimePickerBirthDate = new System.Windows.Forms.DateTimePicker();
             panel1 = new System.Windows.Forms.Panel();
             label1 = new System.Windows.Forms.Label();
+            txtEmail = new System.Windows.Forms.TextBox();
+            comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -115,13 +115,6 @@ namespace StudentManagementSystem
             lblGender.TabIndex = 6;
             lblGender.Text = "Gender:";
             // 
-            // txtGender
-            // 
-            txtGender.Location = new System.Drawing.Point(197, 189);
-            txtGender.Name = "txtGender";
-            txtGender.Size = new System.Drawing.Size(210, 27);
-            txtGender.TabIndex = 7;
-            // 
             // lblBirthDate
             // 
             lblBirthDate.Location = new System.Drawing.Point(497, 189);
@@ -153,13 +146,6 @@ namespace StudentManagementSystem
             lblEmail.Size = new System.Drawing.Size(100, 23);
             lblEmail.TabIndex = 12;
             lblEmail.Text = "Email:";
-            // 
-            // txtEmail
-            // 
-            txtEmail.Location = new System.Drawing.Point(197, 234);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new System.Drawing.Size(210, 27);
-            txtEmail.TabIndex = 13;
             // 
             // lblPhone
             // 
@@ -301,9 +287,25 @@ namespace StudentManagementSystem
             label1.TabIndex = 35;
             label1.Text = "Instructor Form\r\n";
             // 
+            // txtEmail
+            // 
+            txtEmail.Location = new System.Drawing.Point(197, 234);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new System.Drawing.Size(210, 27);
+            txtEmail.TabIndex = 13;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new System.Drawing.Point(197, 191);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(210, 28);
+            comboBox1.TabIndex = 35;
+            // 
             // Form1
             // 
             ClientSize = new System.Drawing.Size(1326, 701);
+            Controls.Add(comboBox1);
             Controls.Add(panel1);
             Controls.Add(dateTimePickerBirthDate);
             Controls.Add(btnSearch);
@@ -315,7 +317,6 @@ namespace StudentManagementSystem
             Controls.Add(lblNameEN);
             Controls.Add(txtNameEN);
             Controls.Add(lblGender);
-            Controls.Add(txtGender);
             Controls.Add(lblBirthDate);
             Controls.Add(lblAddress);
             Controls.Add(txtAddress);
@@ -341,6 +342,8 @@ namespace StudentManagementSystem
             PerformLayout();
         }
 
+        private System.Windows.Forms.ComboBox comboBox1;
+
         private System.Windows.Forms.Label label1;
 
         private System.Windows.Forms.Panel panel1;
@@ -361,7 +364,6 @@ namespace StudentManagementSystem
         private System.Windows.Forms.Label lblNameEN;
         private System.Windows.Forms.TextBox txtNameEN;
         private System.Windows.Forms.Label lblGender;
-        private System.Windows.Forms.TextBox txtGender;
         private System.Windows.Forms.Label lblBirthDate;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.TextBox txtAddress;

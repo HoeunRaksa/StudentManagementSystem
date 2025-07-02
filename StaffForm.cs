@@ -23,23 +23,26 @@ namespace StudentManagementSystem
             InitializeComponent();
             LoadData();
             this.KeyPreview = true;
-            this.KeyDown += Staff_sForm_KeyDown;
-
-
-            txtStaffID.ReadOnly = true;
+            this.KeyDown += Staff_sForm_KeyDown; 
+            txtStaffID.ReadOnly = true; 
 
             dgvStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             btnInsert.Click += btnInsert_Click;
             btnLogout.Click += btnLogOut_Click;
+            btnHome.Click += btnHome_Click;
             btnUpdate.Click += btnUpdate_Click;
             btnNew.Click += btnNew_Click;
             btnRefresh.Click += btnRefresh_Click;
             SearchBar.KeyDown += txtSearchBar_KeyDown;
             dgvStaff.CellClick += dgvStaff_CellClick;
-        }
-
-        //Button Insert
-
+            chkAdmin.CheckedChanged += chkAdmin_CheckedChanged;
+            chkStaff.CheckedChanged += chkStaff_CheckedChanged;
+            chkWork.CheckedChanged += chkWork_CheckedChanged;
+            chkStopWork.CheckedChanged += chkStopWork_CheckedChanged;
+            chkMale.CheckedChanged += chkMale_CheckedChanged;
+            chkFemale.CheckedChanged += chkFemale_CheckedChanged;
+        } 
+        //Button Insert 
         private void btnInsert_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = HandleConnection.GetConnection())
@@ -51,7 +54,6 @@ namespace StudentManagementSystem
 
                     string newStaffID = GenerateStaffID();
                     txtStaffID.Text = newStaffID;
-
                     cmd.Parameters.AddWithValue("@staffID", newStaffID);
                     cmd.Parameters.AddWithValue("@namekh", txtNameKH.Text);
                     cmd.Parameters.AddWithValue("@nameen", txtNameEN.Text);
@@ -67,19 +69,17 @@ namespace StudentManagementSystem
                     cmd.Parameters.AddWithValue("@status", chkWork.Checked ? 1 : 0);
 
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Inserted successfully.");
+                    MessageBox.Show("Inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadData();
                     ClearForm();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Insert failed: " + ex.Message);
+                    MessageBox.Show("Insert failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
             }
-        }
-
-        //Btton Update 
-
+        } 
+        //Btton Update  
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = HandleConnection.GetConnection())
@@ -104,32 +104,35 @@ namespace StudentManagementSystem
                     cmd.Parameters.AddWithValue("@Status", chkWork.Checked ? 1 : 0);
 
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Updated successfully.");
+                    MessageBox.Show("Updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); 
                     LoadData();
                     ClearForm();
                 }
                 catch (Exception ex)
-                {
-                    MessageBox.Show("Update failed: " + ex.Message);
+                { 
+                    MessageBox.Show("Update failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
             }
-        }
-
-        // Button Logout 
-
+        } 
+        // Button Logout  
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            //Form1 fm1 = new Form1();
-            //fm1.Show();
-            //this.Hide();
+            Login li = new Login();
+            li.Show();
+            this.Hide();
+        } 
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            Main mn = new Main();
+            mn.Show();
+            this.Hide();
         }
         private void LoadData()
         {
             try
             {
                 using (var conn = HandleConnection.GetConnection())
-                {
-                  
+                { 
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStaff", conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -145,14 +148,16 @@ namespace StudentManagementSystem
                         bool isMale = row["gender"].ToString() == "True" || row["gender"].ToString() == "1";
                         row["GenderText"] = isMale ? "Male" : "Female";
 
+                        // Convert Role to "Staff" / "Admin" 
                         bool isAdmin = row["role"].ToString() == "True" || row["role"].ToString() == "1";
-                        row["RoleText"] = isMale ? "Admin" : "Staff";
+                        row["RoleText"] = isAdmin ? "Admin" : "Staff";
 
                         // Convert Status (bit) to "Work" / "Stop Work"
                         bool isWorking = row["status"].ToString() == "True" || row["status"].ToString() == "1";
                         row["StatusText"] = isWorking ? "Work" : "Stop Work";
                     }
                     // Bind only the desired columns  
+                    txtStaffID.Text = GenerateStaffID(); // Auto-generate ID here   
                     sub_LoadData();
 
                     dgvStaff.DataSource = dt;
@@ -166,8 +171,7 @@ namespace StudentManagementSystem
         private void txtSearchBar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
-
+            { 
                 e.SuppressKeyPress = true;
                 SearchAndFillForm();
             }
@@ -188,28 +192,22 @@ namespace StudentManagementSystem
                     {
                         nextControl.Focus();
                         break;
-                    }
-
+                    } 
                     nextControl = GetNextControl(nextControl, true); // skip and look further
                 }
             }
-        }
-
-        //Button New
-
+        } 
         private void btnNew_Click(object sender, EventArgs e)
         {
             ClearForm();
             LoadData();
-        }
-
+        } 
         private void btnRefresh_Click(object sender, EventArgs e)
-        {
-
+        { 
             LoadData();
             ClearForm();
+            txtStaffID.Clear(); 
         }
-
         private void dgvStaff_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) 
@@ -231,6 +229,7 @@ namespace StudentManagementSystem
                 chkStaff.Checked = role == "Staff";
 
                 txtEmail.Text = row.Cells["email"].Value?.ToString();
+                txtPassword.Text = row.Cells["password"].Value?.ToString();
                 txtPhone.Text = row.Cells["phone"].Value?.ToString();
 
                 string salaryValue = row.Cells["salary"].Value?.ToString();
@@ -239,22 +238,13 @@ namespace StudentManagementSystem
                 chkWork.Checked = status == "Work";
                 chkStopWork.Checked = status == "Stop Work";
 
-                dtpBirthDate.Value = row.Cells["birthdate"].Value == DBNull.Value
-                ? DateTime.Today
-                : Convert.ToDateTime(row.Cells["birthdate"].Value);
-
-                dtpHiredDate.Value = row.Cells["hireDate"].Value == DBNull.Value
-                    ? DateTime.Today
-                    : Convert.ToDateTime(row.Cells["hireDate"].Value);
+                dtpBirthDate.Value = row.Cells["birthdate"].Value == DBNull.Value ? DateTime.Today: Convert.ToDateTime(row.Cells["birthdate"].Value); 
+                dtpHiredDate.Value = row.Cells["hireDate"].Value == DBNull.Value ? DateTime.Today: Convert.ToDateTime(row.Cells["hireDate"].Value); 
             }
-        }
-
-
-
-
+        } 
         private void ClearForm()
         {
-            txtStaffID.Clear();
+            txtStaffID.Text = GenerateStaffID(); // Auto-generate ID here  
             txtNameKH.Clear();
             txtNameEN.Clear();
             chkMale.Checked = false;
@@ -271,21 +261,18 @@ namespace StudentManagementSystem
             chkWork.Checked = false;
             chkStopWork.Checked = false;
             SearchBar.Clear();
-        }
-
-
+        } 
         private void SearchAndFillForm()
         {
-            SqlConnection conn = HandleConnection.GetConnection();
-
-
+            if (string.IsNullOrWhiteSpace(SearchBar.Text))
             {
-                //if (conn.State != ConnectionState.Open)
-                //    conn.Open();
-
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStaff WHERE StaffID = @StaffID", conn);
+                LoadData();
+                return;
+            }
+            SqlConnection conn = HandleConnection.GetConnection(); 
+            {
                  
-
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tbStaff WHERE StaffID = @StaffID", conn); 
                 da.SelectCommand.Parameters.AddWithValue("@StaffID", SearchBar.Text);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -311,11 +298,7 @@ namespace StudentManagementSystem
                     chkStaff.Checked = !gender;
 
                     txtEmail.Text = row["email"].ToString();
-                    txtPassword.Text = row["password"].ToString();
-
-                    //If dont want to show password when search use this
-                    //txtPassword.ReadOnly = true; 
-
+                    txtPassword.Text = row["password"].ToString(); 
 
                     txtPhone.Text = row["phone"].ToString();
                     dtpHiredDate.Value = Convert.ToDateTime(row["hiredate"]);
@@ -335,24 +318,17 @@ namespace StudentManagementSystem
                         r["GenderText"] = r["gender"].ToString() == "1" ? "Male" : "Female";
                         r["RoleText"] = r["gender"].ToString() == "1" ? "Admin" : "Staff";
                         r["StatusText"] = r["status"].ToString() == "1" ? "Study" : "Stop Study";
-                    }
-
+                    } 
                     // Bind only the desired columns 
                     sub_LoadData();
-                    dgvStaff.DataSource = dt;
-
-
-
+                    dgvStaff.DataSource = dt;  
                 }
                 else
                 {
                     MessageBox.Show("Student not found.");
-                }
-
+                } 
             }
-        }
-
-
+        } 
         private void sub_LoadData()
         {
             dgvStaff.DataSource = null;
@@ -377,7 +353,7 @@ namespace StudentManagementSystem
             dgvStaff.Columns.Add("address", "Address");
             dgvStaff.Columns["address"].DataPropertyName = "address";
 
-            dgvStaff.Columns.Add("RoleText", "Status");
+            dgvStaff.Columns.Add("RoleText", "Role");
             dgvStaff.Columns["RoleText"].DataPropertyName = "RoleText";
 
             dgvStaff.Columns.Add("email", "Email");
@@ -397,18 +373,47 @@ namespace StudentManagementSystem
 
             dgvStaff.Columns.Add("StatusText", "Status");
             dgvStaff.Columns["StatusText"].DataPropertyName = "StatusText";
+            HideColumns();
         }
         private void HideColumns()
         {
-            string[] hidden = {  "password",  };
+            string[] hidden = {"password"};
             foreach (string col in hidden)
             {
-                if (dgvStudent.Columns.Contains(col))
-                    dgvStudent.Columns[col].Visible = false;
+                if (dgvStaff.Columns.Contains(col))
+                    dgvStaff.Columns[col].Visible = false;
             }
+        } 
+        private void chkAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAdmin.Checked)
+                chkStaff.Checked = false;
+        } 
+        private void chkStaff_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStaff.Checked)
+                chkAdmin.Checked = false;
         }
-
-
+        private void chkWork_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkWork.Checked)
+                chkStopWork.Checked = false;
+        } 
+        private void chkStopWork_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStopWork.Checked)
+                chkWork.Checked = false;
+        } 
+        private void chkMale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMale.Checked)
+                chkFemale.Checked = false;
+        } 
+        private void chkFemale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFemale.Checked)
+                chkMale.Checked = false;
+        }
         //Genrate ID
         private string GenerateStaffID()
         {
@@ -427,8 +432,7 @@ namespace StudentManagementSystem
                     num++;
                     newID = "S" + num.ToString("D4");
                 }
-            }
-
+            } 
             return newID;
         } 
     }

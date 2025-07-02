@@ -1,92 +1,107 @@
-namespace StudentManagementSystem;
 
-public partial class Main : Form
+namespace StudentManagementSystem
 {
-    public Main()
+    public partial class Main : Form
     {
-        InitializeComponent();
-    }
+        public Main()
+        {
+            InitializeComponent();
+            this.FormClosing += Main_FormClosing;
+        }
 
-    private void enrollment_Click(object sender, EventArgs e)
-    {
-        Enrollment enrollment = new Enrollment();
-        enrollment.Show();
-    }
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to exit?",
+                "Confirm Exit",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-    private void staff_Click(object sender, EventArgs e)
-    {
-       Staff_sForm staff_sform = new Staff_sForm();
-       staff_sform.Show();
-    }
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
 
-    private void student_Click(object sender, EventArgs e)
-    {
-        Student_Form student_form = new Student_Form();
-        student_form.Show();
-    }
+        private void OpenChildForm(Form childForm)
+        {
+            this.Hide();
+            childForm.FormClosed += (s, args) => this.Show();
+            childForm.Show();
+        }
 
-    private void instructor_Click(object sender, EventArgs e)
-    {
-        Instructor instructor = new Instructor();
-        instructor.Show();
-    }
+        private void enrollment_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Enrollment());
+        }
 
-    private void department_Click(object sender, EventArgs e)
-    {
-        Department department = new Department();
-        department.Show();
-    }
+        private void staff_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Staff_sForm());
+        }
 
-    private void subject_Click(object sender, EventArgs e)
-    {
-        
-    }
+        private void student_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Student_Form());
+        }
 
-    private void classroom_Click(object sender, EventArgs e)
-    {
-        Classroom classroom = new Classroom();
-        classroom.Show();
-    }
+        private void instructor_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Instructor());
+        }
 
-    private void schedule_Click(object sender, EventArgs e)
-    {
-        Schedule schedule = new Schedule();
-        schedule.Show();
-    }
+        private void department_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Department());
+        }
 
-    private void payment_Click(object sender, EventArgs e)
-    {
-        Payment payment = new Payment();
-        payment.Show();
-    }
+        private void subject_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Subjectcs());
+             // Assuming you have Subject form
+        }
 
-    private void result_Click(object sender, EventArgs e)
-    {
-        ResultForm result_form = new ResultForm();
-        result_form.Show();
-    }
+        private void classroom_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Classroom());
+        }
 
-    private void final_Click(object sender, EventArgs e)
-    {
-        FinalResult final_result = new FinalResult();
-        final_result.Show();
-    }
+        private void schedule_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Schedule());
+        }
 
-    private void analyst_Click(object sender, EventArgs e)
-    {
-        Analyst analyst = new Analyst();
-        analyst.Show();
-    }
+        private void payment_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Payment());
+        }
 
-    private void logout_Click(object sender, EventArgs e)
-    {
-        Login login = new Login();
-        login.Show();
-        this.Close();
-    }
+        private void result_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new ResultForm());
+        }
 
-    private void close_Click(object sender, EventArgs e)
-    {
-        this.Close();
+        private void final_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FinalResult());
+        }
+
+        private void analyst_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Analyst());
+        }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.FormClosed += (s, args) => Application.Exit(); // Ensure app quits if login is closed
+            login.Show();
+            this.Close();
+        }
+
+        private void close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
