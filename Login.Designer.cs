@@ -63,16 +63,16 @@ partial class Login
         // label2
         // 
         label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        label2.Location = new System.Drawing.Point(147, 154);
+        label2.Location = new System.Drawing.Point(184, 157);
         label2.Name = "label2";
         label2.Size = new System.Drawing.Size(143, 41);
         label2.TabIndex = 1;
-        label2.Text = "User name :";
+        label2.Text = "Email :";
         // 
         // txtuser
         // 
         txtuser.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        txtuser.Location = new System.Drawing.Point(322, 154);
+        txtuser.Location = new System.Drawing.Point(303, 154);
         txtuser.Name = "txtuser";
         txtuser.Size = new System.Drawing.Size(331, 38);
         txtuser.TabIndex = 2;
@@ -89,7 +89,7 @@ partial class Login
         // txtpassword
         // 
         txtpassword.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        txtpassword.Location = new System.Drawing.Point(322, 225);
+        txtpassword.Location = new System.Drawing.Point(303, 225);
         txtpassword.Name = "txtpassword";
         txtpassword.Size = new System.Drawing.Size(331, 38);
         txtpassword.TabIndex = 4;
