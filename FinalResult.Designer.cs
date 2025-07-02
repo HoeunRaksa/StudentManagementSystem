@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label6 = new Label();
             pictureBox1 = new PictureBox();
             dataOne = new DataGridView();
             cbdepartment = new ComboBox();
@@ -43,7 +44,6 @@
             label5 = new Label();
             cbsemester = new ComboBox();
             Semester = new Label();
-            label6 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataOne).BeginInit();
@@ -59,6 +59,16 @@
             panel1.Size = new Size(1286, 63);
             panel1.TabIndex = 1;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 25F, FontStyle.Bold, GraphicsUnit.Pixel);
+            label6.Location = new Point(557, 19);
+            label6.Name = "label6";
+            label6.Size = new Size(160, 35);
+            label6.TabIndex = 15;
+            label6.Text = "Final Results";
+            // 
             // pictureBox1
             // 
             pictureBox1.Cursor = Cursors.Hand;
@@ -69,6 +79,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += Logout;
             // 
             // dataOne
             // 
@@ -194,16 +205,6 @@
             Semester.Size = new Size(71, 19);
             Semester.TabIndex = 14;
             Semester.Text = "Semester";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 25F, FontStyle.Bold, GraphicsUnit.Pixel);
-            label6.Location = new Point(557, 19);
-            label6.Name = "label6";
-            label6.Size = new Size(160, 35);
-            label6.TabIndex = 15;
-            label6.Text = "Final Results";
             // 
             // FinalResult
             // 

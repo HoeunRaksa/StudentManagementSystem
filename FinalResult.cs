@@ -22,6 +22,11 @@ namespace StudentManagementSystem
             cbshift.SelectedIndexChanged += ComboBoxes_SelectionChanged;
             cbsemester.SelectedIndexChanged += ComboBoxes_SelectionChanged;
         }
+        private void Logout(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
         private void LoadComboBoxes()
         {
             isLoading = true;
