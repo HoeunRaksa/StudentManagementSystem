@@ -220,8 +220,9 @@ private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
             txtDepartment.Clear();
             txtDegree.Clear();
             chkStatus.Checked = false;
-
-            txtInstructorID.Enabled = true; // Allow new ID
+            txtInstructorID.Enabled = true; 
+            txtSearch.Clear();
+            LoadInstructorData();
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
