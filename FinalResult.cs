@@ -21,6 +21,8 @@ namespace StudentManagementSystem
             cbyear.SelectedIndexChanged += ComboBoxes_SelectionChanged;
             cbshift.SelectedIndexChanged += ComboBoxes_SelectionChanged;
             cbsemester.SelectedIndexChanged += ComboBoxes_SelectionChanged;
+            HideColumns();
+            FormatHeader();
         }
         private void Logout(object sender, EventArgs e)
         {
@@ -213,6 +215,56 @@ namespace StudentManagementSystem
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading final results: {ex.Message}");
+            }
+        }
+        private void HideColumns()
+        {
+            string[] hidden = {"departmentID", "classroomID" };
+            foreach (string col in hidden)
+            {
+                if (dataOne.Columns.Contains(col))
+                    dataOne.Columns[col].Visible = false;
+
+
+            }
+        }
+        private void FormatHeader()
+        {
+            if (dataOne.Columns.Contains("createdYear"))
+            {
+                dataOne.Columns["createdYear"].HeaderText = "ExamDate";
+            }
+            if (dataOne.Columns.Contains("studentID"))
+            {
+                dataOne.Columns["studentID"].HeaderText = "StudentID";
+            }
+            if (dataOne.Columns.Contains("studentNameKH"))
+            {
+                dataOne.Columns["studentNameKH"].HeaderText = "StudentNameKH";
+            }
+            if (dataOne.Columns.Contains("studentNameEN"))
+            {
+                dataOne.Columns["studentNameEN"].HeaderText = "StudentNameEN";
+            }
+            if (dataOne.Columns.Contains("totalScore"))
+            {
+                dataOne.Columns["totalScore"].HeaderText = "TotalScore";
+            }
+            if (dataOne.Columns.Contains("totalAverage"))
+            {
+                dataOne.Columns["totalAverage"].HeaderText = "TotalAverage";
+            }
+            if (dataOne.Columns.Contains("grade"))
+            {
+                dataOne.Columns["grade"].HeaderText = "Grade";
+            }
+            if (dataOne.Columns.Contains("semester"))
+            {
+                dataOne.Columns["semester"].HeaderText = "Semester";
+            }
+            if (dataOne.Columns.Contains("generation"))
+            {
+                dataOne.Columns["generation"].HeaderText = "Generation";
             }
         }
 
