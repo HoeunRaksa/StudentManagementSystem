@@ -31,217 +31,230 @@ partial class Analyst
     /// </summary>
     private void InitializeComponent()
     {
-        label1 = new System.Windows.Forms.Label();
-        label2 = new System.Windows.Forms.Label();
-        textBox1 = new System.Windows.Forms.TextBox();
-        textBox2 = new System.Windows.Forms.TextBox();
-        label3 = new System.Windows.Forms.Label();
-        dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-        label4 = new System.Windows.Forms.Label();
-        comboBox1 = new System.Windows.Forms.ComboBox();
-        label5 = new System.Windows.Forms.Label();
-        comboBox2 = new System.Windows.Forms.ComboBox();
-        label7 = new System.Windows.Forms.Label();
-        comboBox4 = new System.Windows.Forms.ComboBox();
-        dataGridView1 = new System.Windows.Forms.DataGridView();
-        btnInsert = new System.Windows.Forms.Button();
-        btnUpdate = new System.Windows.Forms.Button();
-        btnNew = new System.Windows.Forms.Button();
-        btnLogout = new System.Windows.Forms.Button();
-        label6 = new System.Windows.Forms.Label();
-        comboBox3 = new System.Windows.Forms.ComboBox();
-        panel1 = new System.Windows.Forms.Panel();
-        label8 = new System.Windows.Forms.Label();
-        ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+        label1 = new Label();
+        label2 = new Label();
+        textBox1 = new TextBox();
+        textBox2 = new TextBox();
+        label3 = new Label();
+        dateTimePicker1 = new DateTimePicker();
+        label4 = new Label();
+        comboBox1 = new ComboBox();
+        label5 = new Label();
+        comboBox2 = new ComboBox();
+        label7 = new Label();
+        comboBox4 = new ComboBox();
+        dataGridView1 = new DataGridView();
+        btnInsert = new Button();
+        btnUpdate = new Button();
+        btnNew = new Button();
+        btnLogout = new Button();
+        label6 = new Label();
+        comboBox3 = new ComboBox();
+        panel1 = new Panel();
+        label8 = new Label();
+        ((ISupportInitialize)dataGridView1).BeginInit();
         panel1.SuspendLayout();
         SuspendLayout();
         // 
         // label1
         // 
-        label1.Location = new System.Drawing.Point(89, 108);
+        label1.Location = new Point(78, 81);
         label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(100, 23);
+        label1.Size = new Size(88, 17);
         label1.TabIndex = 0;
         label1.Text = "AnalystID";
         // 
         // label2
         // 
-        label2.Location = new System.Drawing.Point(78, 162);
+        label2.Location = new Point(68, 122);
         label2.Name = "label2";
-        label2.Size = new System.Drawing.Size(132, 23);
+        label2.Size = new Size(116, 17);
         label2.TabIndex = 1;
         label2.Text = "AnalystReport";
         // 
         // textBox1
         // 
-        textBox1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        textBox1.Location = new System.Drawing.Point(195, 96);
+        textBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        textBox1.Location = new Point(171, 72);
+        textBox1.Margin = new Padding(3, 2, 3, 2);
         textBox1.Name = "textBox1";
-        textBox1.Size = new System.Drawing.Size(299, 38);
+        textBox1.Size = new Size(262, 32);
         textBox1.TabIndex = 2;
         // 
         // textBox2
         // 
-        textBox2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        textBox2.Location = new System.Drawing.Point(195, 159);
+        textBox2.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        textBox2.Location = new Point(171, 119);
+        textBox2.Margin = new Padding(3, 2, 3, 2);
         textBox2.Name = "textBox2";
-        textBox2.Size = new System.Drawing.Size(299, 38);
+        textBox2.Size = new Size(262, 32);
         textBox2.TabIndex = 3;
         // 
         // label3
         // 
-        label3.Location = new System.Drawing.Point(78, 234);
+        label3.Location = new Point(68, 176);
         label3.Name = "label3";
-        label3.Size = new System.Drawing.Size(132, 23);
+        label3.Size = new Size(116, 17);
         label3.TabIndex = 4;
         label3.Text = "Date";
         // 
         // dateTimePicker1
         // 
-        dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        dateTimePicker1.Location = new System.Drawing.Point(195, 226);
+        dateTimePicker1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        dateTimePicker1.Location = new Point(171, 170);
+        dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
         dateTimePicker1.Name = "dateTimePicker1";
-        dateTimePicker1.Size = new System.Drawing.Size(383, 30);
+        dateTimePicker1.Size = new Size(336, 26);
         dateTimePicker1.TabIndex = 5;
         // 
         // label4
         // 
-        label4.Location = new System.Drawing.Point(729, 147);
+        label4.Location = new Point(638, 110);
         label4.Name = "label4";
-        label4.Size = new System.Drawing.Size(100, 23);
+        label4.Size = new Size(88, 17);
         label4.TabIndex = 6;
         label4.Text = "StaffKH";
         // 
         // comboBox1
         // 
-        comboBox1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        comboBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
         comboBox1.FormattingEnabled = true;
-        comboBox1.Location = new System.Drawing.Point(813, 131);
+        comboBox1.Location = new Point(711, 98);
+        comboBox1.Margin = new Padding(3, 2, 3, 2);
         comboBox1.Name = "comboBox1";
-        comboBox1.Size = new System.Drawing.Size(293, 39);
+        comboBox1.Size = new Size(257, 33);
         comboBox1.TabIndex = 7;
         comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
         // 
         // label5
         // 
-        label5.Location = new System.Drawing.Point(738, 200);
+        label5.Location = new Point(646, 150);
         label5.Name = "label5";
-        label5.Size = new System.Drawing.Size(100, 23);
+        label5.Size = new Size(88, 17);
         label5.TabIndex = 8;
         label5.Text = "Role";
         // 
         // comboBox2
         // 
-        comboBox2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        comboBox2.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
         comboBox2.FormattingEnabled = true;
-        comboBox2.Location = new System.Drawing.Point(813, 188);
+        comboBox2.Location = new Point(711, 141);
+        comboBox2.Margin = new Padding(3, 2, 3, 2);
         comboBox2.Name = "comboBox2";
-        comboBox2.Size = new System.Drawing.Size(293, 39);
+        comboBox2.Size = new Size(257, 33);
         comboBox2.TabIndex = 9;
         // 
         // label7
         // 
-        label7.Location = new System.Drawing.Point(668, 257);
+        label7.Location = new Point(584, 193);
         label7.Name = "label7";
-        label7.Size = new System.Drawing.Size(139, 29);
+        label7.Size = new Size(122, 22);
         label7.TabIndex = 12;
         label7.Text = "Department Name";
         // 
         // comboBox4
         // 
-        comboBox4.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        comboBox4.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
         comboBox4.FormattingEnabled = true;
-        comboBox4.Location = new System.Drawing.Point(813, 247);
+        comboBox4.Location = new Point(711, 185);
+        comboBox4.Margin = new Padding(3, 2, 3, 2);
         comboBox4.Name = "comboBox4";
-        comboBox4.Size = new System.Drawing.Size(293, 39);
+        comboBox4.Size = new Size(257, 33);
         comboBox4.TabIndex = 13;
         // 
         // dataGridView1
         // 
         dataGridView1.ColumnHeadersHeight = 29;
-        dataGridView1.Location = new System.Drawing.Point(154, 412);
+        dataGridView1.Location = new Point(135, 309);
+        dataGridView1.Margin = new Padding(3, 2, 3, 2);
         dataGridView1.Name = "dataGridView1";
         dataGridView1.RowHeadersWidth = 51;
-        dataGridView1.Size = new System.Drawing.Size(804, 295);
+        dataGridView1.Size = new Size(704, 221);
         dataGridView1.TabIndex = 14;
         // 
         // btnInsert
         // 
-        btnInsert.Location = new System.Drawing.Point(154, 337);
+        btnInsert.Location = new Point(135, 253);
+        btnInsert.Margin = new Padding(3, 2, 3, 2);
         btnInsert.Name = "btnInsert";
-        btnInsert.Size = new System.Drawing.Size(120, 42);
+        btnInsert.Size = new Size(105, 32);
         btnInsert.TabIndex = 15;
         btnInsert.Text = "Insert";
         btnInsert.UseVisualStyleBackColor = true;
         // 
         // btnUpdate
         // 
-        btnUpdate.Location = new System.Drawing.Point(319, 337);
+        btnUpdate.Location = new Point(279, 253);
+        btnUpdate.Margin = new Padding(3, 2, 3, 2);
         btnUpdate.Name = "btnUpdate";
-        btnUpdate.Size = new System.Drawing.Size(123, 42);
+        btnUpdate.Size = new Size(108, 32);
         btnUpdate.TabIndex = 16;
         btnUpdate.Text = "Update";
         btnUpdate.UseVisualStyleBackColor = true;
         // 
         // btnNew
         // 
-        btnNew.Location = new System.Drawing.Point(525, 337);
+        btnNew.Location = new Point(459, 253);
+        btnNew.Margin = new Padding(3, 2, 3, 2);
         btnNew.Name = "btnNew";
-        btnNew.Size = new System.Drawing.Size(123, 42);
+        btnNew.Size = new Size(108, 32);
         btnNew.TabIndex = 17;
         btnNew.Text = "New";
         btnNew.UseVisualStyleBackColor = true;
         // 
         // btnLogout
         // 
-        btnLogout.Location = new System.Drawing.Point(768, 337);
+        btnLogout.Location = new Point(672, 253);
+        btnLogout.Margin = new Padding(3, 2, 3, 2);
         btnLogout.Name = "btnLogout";
-        btnLogout.Size = new System.Drawing.Size(130, 42);
+        btnLogout.Size = new Size(114, 32);
         btnLogout.TabIndex = 18;
         btnLogout.Text = "Logout";
         btnLogout.UseVisualStyleBackColor = true;
         // 
         // label6
         // 
-        label6.Location = new System.Drawing.Point(729, 88);
+        label6.Location = new Point(638, 66);
         label6.Name = "label6";
-        label6.Size = new System.Drawing.Size(100, 23);
+        label6.Size = new Size(88, 17);
         label6.TabIndex = 19;
         label6.Text = "StaffEN";
         // 
         // comboBox3
         // 
-        comboBox3.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        comboBox3.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
         comboBox3.FormattingEnabled = true;
-        comboBox3.Location = new System.Drawing.Point(813, 76);
+        comboBox3.Location = new Point(711, 57);
+        comboBox3.Margin = new Padding(3, 2, 3, 2);
         comboBox3.Name = "comboBox3";
-        comboBox3.Size = new System.Drawing.Size(293, 39);
+        comboBox3.Size = new Size(257, 33);
         comboBox3.TabIndex = 20;
         // 
         // panel1
         // 
-        panel1.BackColor = System.Drawing.Color.DarkOrange;
+        panel1.BackColor = Color.DarkOrange;
         panel1.Controls.Add(label8);
-        panel1.Location = new System.Drawing.Point(0, -2);
+        panel1.Location = new Point(0, -2);
+        panel1.Margin = new Padding(3, 2, 3, 2);
         panel1.Name = "panel1";
-        panel1.Size = new System.Drawing.Size(1293, 68);
+        panel1.Size = new Size(1131, 51);
         panel1.TabIndex = 21;
         // 
         // label8
         // 
-        label8.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        label8.Location = new System.Drawing.Point(525, 23);
+        label8.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        label8.Location = new Point(459, 17);
         label8.Name = "label8";
-        label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-        label8.Size = new System.Drawing.Size(172, 34);
+        label8.RightToLeft = RightToLeft.Yes;
+        label8.Size = new Size(150, 26);
         label8.TabIndex = 22;
         label8.Text = "AnalystForm";
         // 
-        // Form1
+        // Analyst
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(1283, 733);
+        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new Size(1123, 550);
         Controls.Add(panel1);
         Controls.Add(comboBox3);
         Controls.Add(label6);
@@ -262,8 +275,11 @@ partial class Analyst
         Controls.Add(textBox1);
         Controls.Add(label2);
         Controls.Add(label1);
+        Margin = new Padding(3, 2, 3, 2);
+        Name = "Analyst";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Analyst";
-        ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+        ((ISupportInitialize)dataGridView1).EndInit();
         panel1.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();

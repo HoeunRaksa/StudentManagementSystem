@@ -31,75 +31,66 @@ partial class Main
     /// </summary>
     private void InitializeComponent()
     {
-        panel1 = new System.Windows.Forms.Panel();
-        label1 = new System.Windows.Forms.Label();
-        enrollment = new System.Windows.Forms.Button();
-        staff = new System.Windows.Forms.Button();
-        student = new System.Windows.Forms.Button();
-        instructor = new System.Windows.Forms.Button();
-        department = new System.Windows.Forms.Button();
-        subject = new System.Windows.Forms.Button();
-        classroom = new System.Windows.Forms.Button();
-        schedule = new System.Windows.Forms.Button();
-        payment = new System.Windows.Forms.Button();
-        result = new System.Windows.Forms.Button();
-        final = new System.Windows.Forms.Button();
-        analyst = new System.Windows.Forms.Button();
-        logout = new System.Windows.Forms.Button();
-        close = new System.Windows.Forms.Button();
+        panel1 = new Panel();
+        label1 = new Label();
+        enrollment = new Button();
+        student = new Button();
+        instructor = new Button();
+        department = new Button();
+        subject = new Button();
+        classroom = new Button();
+        schedule = new Button();
+        payment = new Button();
+        result = new Button();
+        final = new Button();
+        analyst = new Button();
+        logout = new Button();
+        close = new Button();
+        staff = new Button();
         panel1.SuspendLayout();
         SuspendLayout();
         // 
         // panel1
         // 
-        panel1.BackColor = System.Drawing.Color.DarkOrange;
+        panel1.BackColor = Color.DarkOrange;
         panel1.Controls.Add(label1);
-        panel1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-        panel1.Location = new System.Drawing.Point(-2, -1);
+        panel1.ForeColor = SystemColors.ButtonHighlight;
+        panel1.Location = new Point(-2, -1);
+        panel1.Margin = new Padding(3, 2, 3, 2);
         panel1.Name = "panel1";
-        panel1.Size = new System.Drawing.Size(1310, 119);
+        panel1.Size = new Size(1146, 89);
         panel1.TabIndex = 0;
         // 
         // label1
         // 
-        label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 19.800001F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)0));
-        label1.Location = new System.Drawing.Point(374, 35);
+        label1.Font = new Font("Arial Rounded MT Bold", 19.8000011F, FontStyle.Underline, GraphicsUnit.Point, 0);
+        label1.Location = new Point(327, 26);
         label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(540, 59);
+        label1.Size = new Size(472, 44);
         label1.TabIndex = 1;
         label1.Text = "Student Management System";
         // 
         // enrollment
         // 
-        enrollment.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        enrollment.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        enrollment.Location = new System.Drawing.Point(97, 213);
+        enrollment.BackColor = SystemColors.ActiveBorder;
+        enrollment.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        enrollment.Location = new Point(85, 160);
+        enrollment.Margin = new Padding(3, 2, 3, 2);
         enrollment.Name = "enrollment";
-        enrollment.Size = new System.Drawing.Size(173, 73);
+        enrollment.Size = new Size(151, 55);
         enrollment.TabIndex = 1;
         enrollment.Text = "Enrollment";
         enrollment.UseVisualStyleBackColor = false;
         enrollment.Click += enrollment_Click;
         // 
-        // staff
-        // 
-        staff.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        staff.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        staff.Location = new System.Drawing.Point(372, 213);
-        staff.Name = "staff";
-        staff.Size = new System.Drawing.Size(173, 73);
-        staff.TabIndex = 2;
-        staff.Text = "Staff";
-        staff.UseVisualStyleBackColor = false;
-        staff.Click += staff_Click;
-        // 
         // student
         // 
-        student.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        student.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        student.Location = new System.Drawing.Point(658, 213);
+        student.BackColor = SystemColors.ActiveBorder;
+        student.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        student.Location = new Point(576, 160);
+        student.Margin = new Padding(3, 2, 3, 2);
         student.Name = "student";
-        student.Size = new System.Drawing.Size(173, 73);
+        student.Size = new Size(151, 55);
         student.TabIndex = 3;
         student.Text = "Student";
         student.UseVisualStyleBackColor = false;
@@ -107,11 +98,12 @@ partial class Main
         // 
         // instructor
         // 
-        instructor.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        instructor.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        instructor.Location = new System.Drawing.Point(945, 213);
+        instructor.BackColor = SystemColors.ActiveBorder;
+        instructor.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        instructor.Location = new Point(827, 160);
+        instructor.Margin = new Padding(3, 2, 3, 2);
         instructor.Name = "instructor";
-        instructor.Size = new System.Drawing.Size(173, 73);
+        instructor.Size = new Size(151, 55);
         instructor.TabIndex = 4;
         instructor.Text = "Instructor";
         instructor.UseVisualStyleBackColor = false;
@@ -119,11 +111,12 @@ partial class Main
         // 
         // department
         // 
-        department.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        department.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        department.Location = new System.Drawing.Point(97, 349);
+        department.BackColor = SystemColors.ActiveBorder;
+        department.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        department.Location = new Point(85, 262);
+        department.Margin = new Padding(3, 2, 3, 2);
         department.Name = "department";
-        department.Size = new System.Drawing.Size(173, 73);
+        department.Size = new Size(151, 55);
         department.TabIndex = 5;
         department.Text = "Department";
         department.UseVisualStyleBackColor = false;
@@ -131,11 +124,12 @@ partial class Main
         // 
         // subject
         // 
-        subject.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        subject.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        subject.Location = new System.Drawing.Point(372, 349);
+        subject.BackColor = SystemColors.ActiveBorder;
+        subject.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        subject.Location = new Point(326, 262);
+        subject.Margin = new Padding(3, 2, 3, 2);
         subject.Name = "subject";
-        subject.Size = new System.Drawing.Size(173, 73);
+        subject.Size = new Size(151, 55);
         subject.TabIndex = 6;
         subject.Text = "Subject";
         subject.UseVisualStyleBackColor = false;
@@ -143,11 +137,12 @@ partial class Main
         // 
         // classroom
         // 
-        classroom.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        classroom.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        classroom.Location = new System.Drawing.Point(658, 349);
+        classroom.BackColor = SystemColors.ActiveBorder;
+        classroom.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        classroom.Location = new Point(576, 262);
+        classroom.Margin = new Padding(3, 2, 3, 2);
         classroom.Name = "classroom";
-        classroom.Size = new System.Drawing.Size(173, 73);
+        classroom.Size = new Size(151, 55);
         classroom.TabIndex = 7;
         classroom.Text = "Classroom";
         classroom.UseVisualStyleBackColor = false;
@@ -155,11 +150,12 @@ partial class Main
         // 
         // schedule
         // 
-        schedule.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        schedule.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        schedule.Location = new System.Drawing.Point(945, 349);
+        schedule.BackColor = SystemColors.ActiveBorder;
+        schedule.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        schedule.Location = new Point(827, 262);
+        schedule.Margin = new Padding(3, 2, 3, 2);
         schedule.Name = "schedule";
-        schedule.Size = new System.Drawing.Size(173, 73);
+        schedule.Size = new Size(151, 55);
         schedule.TabIndex = 8;
         schedule.Text = "Schedule";
         schedule.UseVisualStyleBackColor = false;
@@ -167,11 +163,12 @@ partial class Main
         // 
         // payment
         // 
-        payment.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        payment.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        payment.Location = new System.Drawing.Point(97, 490);
+        payment.BackColor = SystemColors.ActiveBorder;
+        payment.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        payment.Location = new Point(85, 368);
+        payment.Margin = new Padding(3, 2, 3, 2);
         payment.Name = "payment";
-        payment.Size = new System.Drawing.Size(173, 73);
+        payment.Size = new Size(151, 55);
         payment.TabIndex = 9;
         payment.Text = "Payment";
         payment.UseVisualStyleBackColor = false;
@@ -179,11 +176,12 @@ partial class Main
         // 
         // result
         // 
-        result.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        result.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        result.Location = new System.Drawing.Point(372, 490);
+        result.BackColor = SystemColors.ActiveBorder;
+        result.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        result.Location = new Point(326, 368);
+        result.Margin = new Padding(3, 2, 3, 2);
         result.Name = "result";
-        result.Size = new System.Drawing.Size(173, 73);
+        result.Size = new Size(151, 55);
         result.TabIndex = 10;
         result.Text = "Result";
         result.UseVisualStyleBackColor = false;
@@ -191,11 +189,12 @@ partial class Main
         // 
         // final
         // 
-        final.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        final.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        final.Location = new System.Drawing.Point(658, 490);
+        final.BackColor = SystemColors.ActiveBorder;
+        final.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        final.Location = new Point(576, 368);
+        final.Margin = new Padding(3, 2, 3, 2);
         final.Name = "final";
-        final.Size = new System.Drawing.Size(173, 73);
+        final.Size = new Size(151, 55);
         final.TabIndex = 11;
         final.Text = "FinalResult";
         final.UseVisualStyleBackColor = false;
@@ -203,11 +202,12 @@ partial class Main
         // 
         // analyst
         // 
-        analyst.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        analyst.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        analyst.Location = new System.Drawing.Point(945, 490);
+        analyst.BackColor = SystemColors.ActiveBorder;
+        analyst.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        analyst.Location = new Point(827, 368);
+        analyst.Margin = new Padding(3, 2, 3, 2);
         analyst.Name = "analyst";
-        analyst.Size = new System.Drawing.Size(173, 73);
+        analyst.Size = new Size(151, 55);
         analyst.TabIndex = 12;
         analyst.Text = "Analyst";
         analyst.UseVisualStyleBackColor = false;
@@ -215,11 +215,12 @@ partial class Main
         // 
         // logout
         // 
-        logout.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        logout.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        logout.Location = new System.Drawing.Point(97, 623);
+        logout.BackColor = SystemColors.ActiveBorder;
+        logout.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        logout.Location = new Point(325, 457);
+        logout.Margin = new Padding(3, 2, 3, 2);
         logout.Name = "logout";
-        logout.Size = new System.Drawing.Size(173, 73);
+        logout.Size = new Size(151, 55);
         logout.TabIndex = 13;
         logout.Text = "=>";
         logout.UseVisualStyleBackColor = false;
@@ -227,22 +228,36 @@ partial class Main
         // 
         // close
         // 
-        close.BackColor = System.Drawing.SystemColors.ActiveBorder;
-        close.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)(System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)), System.Drawing.GraphicsUnit.Point, ((byte)0));
-        close.ForeColor = System.Drawing.Color.Red;
-        close.Location = new System.Drawing.Point(372, 623);
+        close.BackColor = SystemColors.ActiveBorder;
+        close.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        close.ForeColor = Color.Red;
+        close.Location = new Point(85, 457);
+        close.Margin = new Padding(3, 2, 3, 2);
         close.Name = "close";
-        close.Size = new System.Drawing.Size(173, 73);
+        close.Size = new Size(151, 55);
         close.TabIndex = 14;
         close.Text = "X";
         close.UseVisualStyleBackColor = false;
         close.Click += close_Click;
         // 
+        // staff
+        // 
+        staff.BackColor = SystemColors.ActiveBorder;
+        staff.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+        staff.Location = new Point(326, 160);
+        staff.Margin = new Padding(3, 2, 3, 2);
+        staff.Name = "staff";
+        staff.Size = new Size(151, 55);
+        staff.TabIndex = 2;
+        staff.Text = "Staff";
+        staff.UseVisualStyleBackColor = false;
+        staff.Click += staff_Click;
+        // 
         // Main
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(1283, 753);
+        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new Size(1079, 565);
         Controls.Add(close);
         Controls.Add(logout);
         Controls.Add(analyst);
@@ -258,7 +273,9 @@ partial class Main
         Controls.Add(staff);
         Controls.Add(enrollment);
         Controls.Add(panel1);
-        StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        Margin = new Padding(3, 2, 3, 2);
+        Name = "Main";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Main";
         panel1.ResumeLayout(false);
         ResumeLayout(false);
@@ -267,8 +284,6 @@ partial class Main
     private System.Windows.Forms.Button logout;
 
     private System.Windows.Forms.Button close;
-
-    private System.Windows.Forms.Button staff;
     private System.Windows.Forms.Button student;
     private System.Windows.Forms.Button instructor;
     private System.Windows.Forms.Button department;
@@ -286,4 +301,6 @@ partial class Main
     private System.Windows.Forms.Label label1;
 
     #endregion
+
+    private Button staff;
 }

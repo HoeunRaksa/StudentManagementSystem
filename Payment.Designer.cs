@@ -112,7 +112,7 @@ namespace StudentManagementSystem
             lblSearchName.AutoSize = true;
             lblSearchName.Location = new Point(769, 161);
             lblSearchName.Name = "lblSearchName";
-            lblSearchName.Size = new Size(197, 28);
+            lblSearchName.Size = new Size(157, 21);
             lblSearchName.TabIndex = 36;
             lblSearchName.Text = "Search By StudentID: ";
             // 
@@ -120,7 +120,7 @@ namespace StudentManagementSystem
             // 
             DateTimePicker1.Location = new Point(138, 475);
             DateTimePicker1.Name = "DateTimePicker1";
-            DateTimePicker1.Size = new Size(340, 34);
+            DateTimePicker1.Size = new Size(340, 29);
             DateTimePicker1.TabIndex = 35;
             // 
             // cmbStudentID
@@ -128,7 +128,7 @@ namespace StudentManagementSystem
             cmbStudentID.FormattingEnabled = true;
             cmbStudentID.Location = new Point(138, 338);
             cmbStudentID.Name = "cmbStudentID";
-            cmbStudentID.Size = new Size(340, 36);
+            cmbStudentID.Size = new Size(340, 29);
             cmbStudentID.TabIndex = 34;
             // 
             // cmbStaffID
@@ -136,21 +136,21 @@ namespace StudentManagementSystem
             cmbStaffID.FormattingEnabled = true;
             cmbStaffID.Location = new Point(138, 257);
             cmbStaffID.Name = "cmbStaffID";
-            cmbStaffID.Size = new Size(340, 36);
+            cmbStaffID.Size = new Size(340, 29);
             cmbStaffID.TabIndex = 33;
             // 
             // txtAmount
             // 
             txtAmount.Location = new Point(138, 404);
             txtAmount.Name = "txtAmount";
-            txtAmount.Size = new Size(340, 34);
+            txtAmount.Size = new Size(340, 29);
             txtAmount.TabIndex = 31;
             // 
             // txtPaymentID
             // 
             txtPaymentID.Location = new Point(497, 216);
             txtPaymentID.Name = "txtPaymentID";
-            txtPaymentID.Size = new Size(221, 34);
+            txtPaymentID.Size = new Size(221, 29);
             txtPaymentID.TabIndex = 29;
             // 
             // lblStatus
@@ -158,7 +158,7 @@ namespace StudentManagementSystem
             lblStatus.AutoSize = true;
             lblStatus.Location = new Point(3, 627);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(69, 28);
+            lblStatus.Size = new Size(55, 21);
             lblStatus.TabIndex = 28;
             lblStatus.Text = "Status:";
             // 
@@ -167,7 +167,7 @@ namespace StudentManagementSystem
             lblPaymentType.AutoSize = true;
             lblPaymentType.Location = new Point(3, 556);
             lblPaymentType.Name = "lblPaymentType";
-            lblPaymentType.Size = new Size(137, 28);
+            lblPaymentType.Size = new Size(109, 21);
             lblPaymentType.TabIndex = 27;
             lblPaymentType.Text = "Payment Type:";
             // 
@@ -176,7 +176,7 @@ namespace StudentManagementSystem
             lblPaymentDate.AutoSize = true;
             lblPaymentDate.Location = new Point(3, 477);
             lblPaymentDate.Name = "lblPaymentDate";
-            lblPaymentDate.Size = new Size(137, 28);
+            lblPaymentDate.Size = new Size(109, 21);
             lblPaymentDate.TabIndex = 26;
             lblPaymentDate.Text = "Payment Date:";
             // 
@@ -185,7 +185,7 @@ namespace StudentManagementSystem
             lblAmount.AutoSize = true;
             lblAmount.Location = new Point(3, 404);
             lblAmount.Name = "lblAmount";
-            lblAmount.Size = new Size(87, 28);
+            lblAmount.Size = new Size(69, 21);
             lblAmount.TabIndex = 25;
             lblAmount.Text = "Amount:";
             // 
@@ -194,7 +194,7 @@ namespace StudentManagementSystem
             lblStudentID.AutoSize = true;
             lblStudentID.Location = new Point(3, 339);
             lblStudentID.Name = "lblStudentID";
-            lblStudentID.Size = new Size(108, 28);
+            lblStudentID.Size = new Size(85, 21);
             lblStudentID.TabIndex = 24;
             lblStudentID.Text = "Student ID:";
             // 
@@ -203,7 +203,7 @@ namespace StudentManagementSystem
             lblStaffID.AutoSize = true;
             lblStaffID.Location = new Point(3, 262);
             lblStaffID.Name = "lblStaffID";
-            lblStaffID.Size = new Size(79, 28);
+            lblStaffID.Size = new Size(63, 21);
             lblStaffID.TabIndex = 23;
             lblStaffID.Text = "Staff ID:";
             // 
@@ -212,7 +212,7 @@ namespace StudentManagementSystem
             lblPaymentID.AutoSize = true;
             lblPaymentID.Location = new Point(497, 161);
             lblPaymentID.Name = "lblPaymentID";
-            lblPaymentID.Size = new Size(215, 28);
+            lblPaymentID.Size = new Size(170, 21);
             lblPaymentID.TabIndex = 22;
             lblPaymentID.Text = "Payment ID for Update:";
             // 
@@ -221,7 +221,7 @@ namespace StudentManagementSystem
             txtPaymentType.FormattingEnabled = true;
             txtPaymentType.Location = new Point(138, 546);
             txtPaymentType.Name = "txtPaymentType";
-            txtPaymentType.Size = new Size(340, 36);
+            txtPaymentType.Size = new Size(340, 29);
             txtPaymentType.TabIndex = 43;
             // 
             // txtStatus
@@ -229,7 +229,7 @@ namespace StudentManagementSystem
             txtStatus.FormattingEnabled = true;
             txtStatus.Location = new Point(138, 629);
             txtStatus.Name = "txtStatus";
-            txtStatus.Size = new Size(340, 36);
+            txtStatus.Size = new Size(340, 29);
             txtStatus.TabIndex = 44;
             // 
             // cmbSearchStudentID
@@ -237,7 +237,7 @@ namespace StudentManagementSystem
             cmbSearchStudentID.FormattingEnabled = true;
             cmbSearchStudentID.Location = new Point(769, 214);
             cmbSearchStudentID.Name = "cmbSearchStudentID";
-            cmbSearchStudentID.Size = new Size(236, 36);
+            cmbSearchStudentID.Size = new Size(236, 29);
             cmbSearchStudentID.TabIndex = 45;
             // 
             // panel1
@@ -275,7 +275,7 @@ namespace StudentManagementSystem
             // 
             // Payment
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1466, 977);
             Controls.Add(panel1);
@@ -303,6 +303,7 @@ namespace StudentManagementSystem
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 6, 4, 6);
             Name = "Payment";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Payment";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
